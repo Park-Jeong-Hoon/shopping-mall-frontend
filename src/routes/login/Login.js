@@ -1,6 +1,47 @@
-function Login() {
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+
+function Login({ isLogin, setLogin }) {
+
+    const doLogin = async (e) => {
+        e.preventDefault();
+        await axios(
+            {
+                url: '/api/member/login',
+                method: 'post',
+                baseURL: 'http://localhost:8080',
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                data: {
+                    username: e.target[0].value,
+                    password: e.target[1].value
+                }
+            }
+        ).then(function (response) {
+            let jwtHeader = response.headers.get("Authorization")
+            let jwtToken = '';
+            if (jwtHeader.startsWith('Bearer ')) {
+                jwtToken = jwtHeader.replace('Bearer ', '');
+            }
+            setLogin(jwtToken);
+        }).catch(error => console.error('Error:', error));
+    }
+
     return (
-        <div>로그인 페이지</div>
+
+        <div>
+            {
+                isLogin ?
+                    <Navigate to={"/"} /> :
+                    <form onSubmit={doLogin}>
+                        <input type={"text"} placeholder={"아이디"} />
+                        <input type={"password"} placeholder={"비밀번호"} />
+                        <input type={"submit"} value={"로그인"} />
+                    </form>
+            }
+        </div>
     )
 }
 

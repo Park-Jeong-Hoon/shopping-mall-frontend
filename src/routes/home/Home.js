@@ -1,4 +1,4 @@
-function Home() {
+function Home({ isLogin, setLogin }) {
     return (
         <div>홈페이지</div>
     )

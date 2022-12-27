@@ -20,12 +20,16 @@ function Login({ isLogin, setLogin }) {
                 }
             }
         ).then(function (response) {
-            let jwtHeader = response.headers.get("Authorization")
-            let jwtToken = '';
-            if (jwtHeader.startsWith('Bearer ')) {
-                jwtToken = jwtHeader.replace('Bearer ', '');
+            if (response.data === "success") {
+                let jwtHeader = response.headers.get("Authorization")
+                let jwtToken = '';
+                if (jwtHeader.startsWith('Bearer ')) {
+                    jwtToken = jwtHeader.replace('Bearer ', '');
+                }
+                setLogin(true);
+            } else {
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
             }
-            setLogin(jwtToken);
         }).catch(error => console.error('Error:', error));
     }
 

@@ -7,9 +7,9 @@ function Login({ isLogin, setLogin }) {
         e.preventDefault();
         await axios(
             {
-                url: '/api/member/login',
+                url: '/member/login',
                 method: 'post',
-                baseURL: 'http://localhost:8080',
+                baseURL: `${process.env.REACT_APP_BACKEND}`,
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",

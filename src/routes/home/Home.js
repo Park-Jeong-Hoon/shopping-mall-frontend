@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Home({ isLogin, setLogin }) {
+function Home({ isLogin, setLogin, accesToken }) {
     return (
         <div>
             <div>홈페이지</div>

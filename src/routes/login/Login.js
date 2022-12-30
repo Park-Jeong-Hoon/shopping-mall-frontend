@@ -27,6 +27,9 @@ function Login({ isLogin, setLogin }) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
                 setLogin(true);
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${jwtToken}`;
             } else {
                 alert("아이디 또는 비밀번호가 일치하지 않습니다.");
             }

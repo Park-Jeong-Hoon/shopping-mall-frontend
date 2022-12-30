@@ -9,12 +9,11 @@ import axios from 'axios';
 function App() {
 
   const [isLogin, setLogin] = useState(false);
-  const [accessToken, setAccessToken] = useState(null);
 
-  const getAccessToken = async () => {
+  const getProfile = async () => {
     await axios(
       {
-        url: '/member/hello',
+        url: '/member/profile',
         method: 'get',
         baseURL: `${process.env.REACT_APP_BACKEND}`,
         withCredentials: true,
@@ -25,26 +24,29 @@ function App() {
     ).then(function (response) {
       let jwtHeader = response.headers.get("Authorization")
       let jwtToken = '';
+      console.log(response);
       if (jwtHeader !== undefined) {
         if (jwtHeader.startsWith('Bearer ')) {
           jwtToken = jwtHeader.replace('Bearer ', '');
         }
         setLogin(true);
-        setAccessToken(jwtToken);
+        console.log(jwtToken)
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${jwtToken}`;
       }
-      
     }).catch(error => console.error('Error:', error));
   }
 
   useEffect(() => {
-    getAccessToken();
+    getProfile();
   }, [])
 
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} accessToken={accessToken} />} />
+          <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
           <Route path='join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />
           <Route path='login' element={<Login isLogin={isLogin} setLogin={setLogin} />} />
         </Routes>

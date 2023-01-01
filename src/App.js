@@ -1,9 +1,12 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Navigator from './components/Navigator';
 import Home from './routes/home/Home';
 import Join from './routes/join/Join';
 import Login from './routes/login/Login';
+import ItemList from './routes/item/ItemList';
+import OrderList from './routes/order/OrderList';
 import axios from 'axios';
 
 function App() {
@@ -45,10 +48,16 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        {
+          isLogin ?
+            <Navigator /> : null
+        }
         <Routes>
           <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
           <Route path='join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />
           <Route path='login' element={<Login isLogin={isLogin} setLogin={setLogin} />} />
+          <Route path='items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
+          <Route path='orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
         </Routes>
       </div>
     </BrowserRouter>

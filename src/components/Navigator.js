@@ -35,7 +35,7 @@ function Navigator({profile, setLogin}) {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav className="me-auto" onSelect={(selectedKey) => navigate(`/${selectedKey}`)}>
                         <Nav.Link eventKey="items">상품목록</Nav.Link>
-                        <Nav.Link eventKey="add-item">상품등록</Nav.Link>
+                        <Nav.Link eventKey="items/add">상품등록</Nav.Link>
                         <Nav.Link eventKey="orders">주문목록</Nav.Link>
                         <NavDropdown title={`${profile.name}님`} id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => {navigate("/profile")}}>회원정보</NavDropdown.Item>

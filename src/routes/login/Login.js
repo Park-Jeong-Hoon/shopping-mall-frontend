@@ -39,23 +39,22 @@ function Login({ isLogin, setLogin }) {
     }
 
     return (
-
         <>
             {
                 isLogin ?
                     <Navigate to={"/"} /> :
                     <Form onSubmit={doLogin}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label>아이디</Form.Label>
                             <Form.Control type="text" placeholder="아이디" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>비밀번호</Form.Label>
                             <Form.Control type="password" placeholder="비밀번호" />
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            Submit
+                            로그인
                         </Button>
                     </Form>
             }

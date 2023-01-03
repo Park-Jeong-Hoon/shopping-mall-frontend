@@ -50,7 +50,7 @@ function ItemList({ isLogin, setLogin }) {
                             return (
                                 <div className="list">
                                     <h3>{a.name}</h3>
-                                    <p>hello</p>
+                                    <p>{a.price}</p>
                                     <hr />
                                 </div>
                             );

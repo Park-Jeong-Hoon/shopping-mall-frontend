@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Join({ isLogin, setLogin }) {
 
@@ -43,14 +45,31 @@ function Join({ isLogin, setLogin }) {
             {
                 isLogin ?
                     <Navigate to={"/"} /> :
-                    <form onSubmit={doJoin}>
-                        <input type={"text"} placeholder={"아이디"} required />
-                        <input type={"password"} placeholder={"비밀번호"} required />
-                        <input type={"name"} placeholder={"이름"} required/>
-                        <input type={"phone"} placeholder={"휴대번호"} required/>
-                        <input type={"email"} placeholder={"이메일"} required/>
-                        <input type={"submit"} value={"회원가입"} />
-                    </form>
+                    <Form onSubmit={doJoin}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>아이디</Form.Label>
+                            <Form.Control type="text" placeholder="아이디" />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>비밀번호</Form.Label>
+                            <Form.Control type="password" placeholder="비밀번호" />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>이름</Form.Label>
+                            <Form.Control type="text" placeholder="이름" />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>휴대번호</Form.Label>
+                            <Form.Control type="text" placeholder="휴대번호" />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>이메일</Form.Label>
+                            <Form.Control type="text" placeholder="이메일" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            회원가입
+                        </Button>
+                    </Form>
             }
         </div>
     )

@@ -9,10 +9,12 @@ import Login from './routes/login/Login';
 import ItemList from './routes/item/ItemList';
 import OrderList from './routes/order/OrderList';
 import axios from 'axios';
+import { ThemeProvider } from 'react-bootstrap';
 
 function App() {
 
   const [isLogin, setLogin] = useState(false);
+  const [profile, setProfile] = useState({});
 
   const getProfile = async () => {
     await axios(
@@ -38,6 +40,7 @@ function App() {
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${jwtToken}`;
+        setProfile(response.data);
       }
     }).catch(error => console.error('Error:', error));
   }
@@ -47,11 +50,13 @@ function App() {
   }, [])
 
   return (
+    <ThemeProvider   breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+    minBreakpoint="xxs">
     <BrowserRouter>
       <div className="App">
         {
           isLogin ?
-            <Navigator /> : null
+            <Navigator profile={profile} setLogin={setLogin} /> : null
         }
         <Routes>
           <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
@@ -62,6 +67,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

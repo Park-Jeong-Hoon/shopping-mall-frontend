@@ -12,7 +12,6 @@ function Home({ isLogin, setLogin }) {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
-                    // "Authorization" : ""
                 },
             }
         ).then(function (response) {
@@ -20,14 +19,14 @@ function Home({ isLogin, setLogin }) {
             let jwtToken = '';
             console.log(response);
             if (jwtHeader !== undefined) {
-              if (jwtHeader.startsWith('Bearer ')) {
-                jwtToken = jwtHeader.replace('Bearer ', '');
-              }
-              setLogin(true);
-              console.log(jwtToken)
-              axios.defaults.headers.common[
-                "Authorization"
-              ] = `Bearer ${jwtToken}`;
+                if (jwtHeader.startsWith('Bearer ')) {
+                    jwtToken = jwtHeader.replace('Bearer ', '');
+                }
+                setLogin(true);
+                console.log(jwtToken)
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${jwtToken}`;
             }
         }).catch(error => console.error('Error:', error));
     }
@@ -37,18 +36,15 @@ function Home({ isLogin, setLogin }) {
             <div>홈페이지</div>
             {
                 isLogin ?
-                <div>
-
-                    <div>로그아웃</div><button onClick={() => { getHello(); }}>테스트</button></div> :
+                    <div>
+                        <button onClick={() => { getHello(); }}>테스트</button></div> :
                     <div>
                         <div><Link to={"/login"}>로그인</Link></div>
                         <div><Link to={"/join"}>회원가입</Link></div>
-                        
                     </div>
 
             }
         </div>
-
     )
 }
 

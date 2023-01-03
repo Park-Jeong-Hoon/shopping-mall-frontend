@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Login({ isLogin, setLogin }) {
 
@@ -38,17 +40,26 @@ function Login({ isLogin, setLogin }) {
 
     return (
 
-        <div>
+        <>
             {
                 isLogin ?
                     <Navigate to={"/"} /> :
-                    <form onSubmit={doLogin}>
-                        <input type={"text"} placeholder={"아이디"} />
-                        <input type={"password"} placeholder={"비밀번호"} />
-                        <input type={"submit"} value={"로그인"} />
-                    </form>
+                    <Form onSubmit={doLogin}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="text" placeholder="아이디" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="비밀번호" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
             }
-        </div>
+        </>
     )
 }
 

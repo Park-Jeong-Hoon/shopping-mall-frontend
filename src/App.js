@@ -10,6 +10,7 @@ import ItemList from './routes/item/ItemList';
 import ItemDetail from './routes/item/ItemDetail';
 import ItemAdd from './routes/item/ItemAdd';
 import OrderList from './routes/order/OrderList';
+import OrderPayment from './routes/order/OrderPayment';
 import axios from 'axios';
 import { ThemeProvider } from 'react-bootstrap';
 
@@ -68,6 +69,7 @@ function App() {
             <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/orders/payment' element={<OrderPayment isLogin={isLogin} setLogin={setLogin} />} />
           </Routes>
         </div>
       </BrowserRouter>

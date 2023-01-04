@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Table } from 'react-bootstrap';
 
 function ItemDetail({ isLogin, setLogin }) {
 
+    const navigate = useNavigate();
     const { id } = useParams();
     const [item, setItem] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -67,7 +68,13 @@ function ItemDetail({ isLogin, setLogin }) {
                                 </tr>
                             </tbody>
                         </Table>
-                        <Button>주문하기</Button>
+                        <Button onClick={() => {
+                            navigate("/orders/payment", {
+                                state: {
+                                    itemList: [item]
+                                }
+                            })
+                        }}>주문하기</Button>
                     </div>
                     : null
             }

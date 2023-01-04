@@ -7,6 +7,7 @@ import Home from './routes/home/Home';
 import Join from './routes/join/Join';
 import Login from './routes/login/Login';
 import ItemList from './routes/item/ItemList';
+import ItemDetail from './routes/item/ItemDetail';
 import ItemAdd from './routes/item/ItemAdd';
 import OrderList from './routes/order/OrderList';
 import axios from 'axios';
@@ -51,24 +52,25 @@ function App() {
   }, [])
 
   return (
-    <ThemeProvider   breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
-    minBreakpoint="xxs">
-    <BrowserRouter>
-      <div className="App">
-        {
-          isLogin ?
-            <Navigator profile={profile} setLogin={setLogin} /> : null
-        }
-        <Routes>
-          <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
-          <Route path='/join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />
-          <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} />} />
-          <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
-          <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
-          <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <ThemeProvider breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+      minBreakpoint="xxs">
+      <BrowserRouter>
+        <div className="App">
+          {
+            isLogin ?
+              <Navigator profile={profile} setLogin={setLogin} /> : null
+          }
+          <Routes>
+            <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

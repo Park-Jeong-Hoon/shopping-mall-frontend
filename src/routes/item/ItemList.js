@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
 
 function ItemList({ isLogin, setLogin }) {
 
@@ -42,20 +44,28 @@ function ItemList({ isLogin, setLogin }) {
     return (
         <div>
             <h1>상품목록</h1>
-            <hr />
             {
                 isLoading === false ?
-                    <div>
-                        {items.map(function (a) {
-                            return (
-                                <div className="list">
-                                    <h3>{a.name}</h3>
-                                    <p>{a.price}</p>
-                                    <hr />
-                                </div>
-                            );
-                        })}
-                    </div> : null
+                    <Table responsive striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>제품</th>
+                                <th>가격</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map(function (a) {
+                                return (
+                                    <tr>
+                                        <td>{a.name}</td>
+                                        <td>{a.price}</td>
+                                        <td><Link to={`/items/${a.id}`}>상세보기</Link></td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </Table> : null
             }
         </div>
     )

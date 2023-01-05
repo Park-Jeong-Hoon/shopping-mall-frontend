@@ -43,7 +43,7 @@ function ItemList({ isLogin, setLogin }) {
 
     return (
         <div>
-            <h1>상품목록</h1>
+            <h1>제품목록</h1>
             {
                 isLoading === false ?
                     <Table responsive striped bordered hover>
@@ -55,12 +55,12 @@ function ItemList({ isLogin, setLogin }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {items.map(function (a) {
+                            {items.map(function (i) {
                                 return (
                                     <tr>
-                                        <td>{a.name}</td>
-                                        <td>{a.price}</td>
-                                        <td><Link to={`/items/${a.id}`}>상세보기</Link></td>
+                                        <td>{i.name}</td>
+                                        <td>{i.price}</td>
+                                        <td><Link to={`/items/${i.id}`}>상세보기</Link></td>
                                     </tr>
                                 );
                             })}

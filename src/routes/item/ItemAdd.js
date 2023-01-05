@@ -48,9 +48,9 @@ function ItemAdd({ isLogin, setLogin }) {
 
     return (
         <Form onSubmit={addItem}>
-            <h2>상품등록</h2>
+            <h2>제품등록</h2>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>상품명</Form.Label>
+                <Form.Label>제품명</Form.Label>
                 <Form.Control type="text" placeholder="상품의 이름을 적어주세요." />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">

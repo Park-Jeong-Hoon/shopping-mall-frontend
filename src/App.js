@@ -10,6 +10,7 @@ import ItemList from './routes/item/ItemList';
 import ItemDetail from './routes/item/ItemDetail';
 import ItemAdd from './routes/item/ItemAdd';
 import OrderList from './routes/order/OrderList';
+import OrderDetail from './routes/order/OrderDetail';
 import OrderPayment from './routes/order/OrderPayment';
 import axios from 'axios';
 import { ThemeProvider } from 'react-bootstrap';
@@ -66,9 +67,10 @@ function App() {
             <Route path='/join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/orders/:id' element={<OrderDetail isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders/payment' element={<OrderPayment isLogin={isLogin} setLogin={setLogin} />} />
           </Routes>
         </div>

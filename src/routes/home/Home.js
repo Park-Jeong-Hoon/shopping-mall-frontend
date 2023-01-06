@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { Container } from "../../components/styles/Container";
 
 function Home({ isLogin, setLogin }) {
 
@@ -32,7 +33,7 @@ function Home({ isLogin, setLogin }) {
     }
 
     return (
-        <div>
+        <Container>
             <div>홈페이지</div>
             {
                 isLogin ?
@@ -44,7 +45,7 @@ function Home({ isLogin, setLogin }) {
                     </div>
 
             }
-        </div>
+        </Container>
     )
 }
 

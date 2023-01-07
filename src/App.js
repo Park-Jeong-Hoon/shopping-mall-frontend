@@ -58,10 +58,7 @@ function App() {
       minBreakpoint="xxs">
       <BrowserRouter>
         <div className="App">
-          {
-            isLogin ?
-              <Navigator profile={profile} setLogin={setLogin} /> : null
-          }
+          <Navigator profile={profile} isLogin={isLogin} setLogin={setLogin} />
           <Routes>
             <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />

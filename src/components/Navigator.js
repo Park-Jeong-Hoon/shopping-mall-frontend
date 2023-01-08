@@ -2,7 +2,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Navigator({ profile, isLogin, setLogin }) {
+function Navigator({ memberName, isLogin, setLogin }) {
 
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ function Navigator({ profile, isLogin, setLogin }) {
                         <Nav.Link eventKey="orders">주문목록</Nav.Link>
                         {
                             isLogin ?
-                                <NavDropdown title={`${profile.name}님`} id="basic-nav-dropdown">
+                                <NavDropdown title={`${memberName}님`} id="basic-nav-dropdown">
                                     <NavDropdown.Item onClick={() => { navigate("/profile") }}>회원정보</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>

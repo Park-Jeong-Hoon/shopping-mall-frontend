@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function Login({ isLogin, setLogin }) {
+function Login({ isLogin, setLogin, setMemberName }) {
 
     const doLogin = async (e) => {
         e.preventDefault();
@@ -22,13 +22,15 @@ function Login({ isLogin, setLogin }) {
                 }
             }
         ).then(function (response) {
-            if (response.data === "success") {
+            console.log(response.data);
+            if (response.data.result === "success") {
                 let jwtHeader = response.headers.get("Authorization")
                 let jwtToken = '';
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
                 setLogin(true);
+                setMemberName(response.data.name);
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;

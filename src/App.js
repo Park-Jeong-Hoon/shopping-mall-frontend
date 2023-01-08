@@ -18,12 +18,12 @@ import { ThemeProvider } from 'react-bootstrap';
 function App() {
 
   const [isLogin, setLogin] = useState(false);
-  const [profile, setProfile] = useState({});
+  const [memberName, setMemberName] = useState({});
 
-  const getProfile = async () => {
+  const getMemberName = async () => {
     await axios(
       {
-        url: '/member/profile',
+        url: '/member/name',
         method: 'get',
         baseURL: `${process.env.REACT_APP_BACKEND}`,
         withCredentials: true,
@@ -44,13 +44,13 @@ function App() {
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${jwtToken}`;
-        setProfile(response.data);
+        setMemberName(response.data);
       }
     }).catch(error => console.error('Error:', error));
   }
 
   useEffect(() => {
-    getProfile();
+    getMemberName();
   }, [])
 
   return (
@@ -58,11 +58,11 @@ function App() {
       minBreakpoint="xxs">
       <BrowserRouter>
         <div className="App">
-          <Navigator profile={profile} isLogin={isLogin} setLogin={setLogin} />
+          <Navigator memberName={memberName} isLogin={isLogin} setLogin={setLogin} />
           <Routes>
             <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/join' element={<Join isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} setMemberName={setMemberName} />} />
             <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />

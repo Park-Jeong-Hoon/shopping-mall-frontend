@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../components/Header";
 
 function OrderDetail() {
     const navigate = useNavigate();
@@ -43,54 +44,56 @@ function OrderDetail() {
     }, [])
 
     return (
-        <div>
-            <h1>제품상세</h1>
-            <hr />
-            {
-                isLoading === false ?
-                    <div>
-                        <Table responsive striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>제품</th>
-                                    <th>{orderInfo[0].itemName}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>가격</td>
-                                    <td>{orderInfo[0].price}원</td>
-                                </tr>
-                            </tbody>
-                            <thead>
-                                <tr>
-                                    <th>수량</th>
-                                    <th>{orderInfo[0].quantity}</th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th>주문상태</th>
-                                    <th>{orderInfo[0].orderStatus}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>총액</td>
-                                    <td>{orderInfo[0].totalPrice}원</td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>주문날짜</td>
-                                    <td>{orderInfo[0].orderDate}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </div>
-                    : null
-            }
-        </div>
+        <>
+            <Header title={"주문상세"} />
+            <Container>
+                <hr />
+                {
+                    isLoading === false ?
+                        <div>
+                            <Table responsive striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>제품</th>
+                                        <th>{orderInfo[0].itemName}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>가격</td>
+                                        <td>{orderInfo[0].price}원</td>
+                                    </tr>
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>수량</th>
+                                        <th>{orderInfo[0].quantity}</th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>주문상태</th>
+                                        <th>{orderInfo[0].orderStatus}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>총액</td>
+                                        <td>{orderInfo[0].totalPrice}원</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>주문날짜</td>
+                                        <td>{orderInfo[0].orderDate}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </div>
+                        : null
+                }
+            </Container>
+        </>
     )
 }
 

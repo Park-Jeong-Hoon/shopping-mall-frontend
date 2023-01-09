@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import Header from "../../components/Header";
 
 function OrderList({ isLogin, setLogin }) {
     const [orders, setOrders] = useState([]);
@@ -42,34 +42,36 @@ function OrderList({ isLogin, setLogin }) {
     }, [])
 
     return (
-        <div>
-            <h1>주문목록</h1>
-            {
-                isLoading === false ?
-                    <Table responsive striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>주문상태</th>
-                                <th>금액</th>
-                                <th>주문날짜</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orders.map(function (o) {
-                                return (
-                                    <tr>
-                                        <td>{o.orderStatus}</td>
-                                        <td>{o.price}</td>
-                                        <td>{o.orderDate}</td>
-                                        <td><Link to={`/orders/${o.id}`}>상세보기</Link></td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table> : null
-            }
-        </div>
+        <>
+            <Header title={'주문목록'} />
+            <Container>
+                {
+                    isLoading === false ?
+                        <Table responsive striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>주문상태</th>
+                                    <th>금액</th>
+                                    <th>주문날짜</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map(function (o) {
+                                    return (
+                                        <tr>
+                                            <td>{o.orderStatus}</td>
+                                            <td>{o.price}</td>
+                                            <td>{o.orderDate}</td>
+                                            <td><Link to={`/orders/${o.id}`}>상세보기</Link></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table> : null
+                }
+            </Container>
+        </>
     )
 }
 

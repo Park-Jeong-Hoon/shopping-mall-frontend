@@ -3,6 +3,8 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import Header from "../../components/Header";
 
 function ItemAdd({ isLogin, setLogin }) {
 
@@ -47,24 +49,28 @@ function ItemAdd({ isLogin, setLogin }) {
     }
 
     return (
-        <Form onSubmit={addItem}>
-            <h2>제품등록</h2>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>제품명</Form.Label>
-                <Form.Control type="text" placeholder="상품의 이름을 적어주세요." />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>금액</Form.Label>
-                <Form.Control type="number" placeholder="상품의 금액을 적어주세요" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>수량</Form.Label>
-                <Form.Control type="number" placeholder="상품의 수량을 적어주세요" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                등록신청
-            </Button>
-        </Form>
+        <>
+            <Header title={'제품등록'} />
+            <Container>
+                <Form onSubmit={addItem}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>제품명</Form.Label>
+                        <Form.Control type="text" placeholder="상품의 이름을 적어주세요." />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>금액</Form.Label>
+                        <Form.Control type="number" placeholder="상품의 금액을 적어주세요" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>수량</Form.Label>
+                        <Form.Control type="number" placeholder="상품의 수량을 적어주세요" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        등록신청
+                    </Button>
+                </Form>
+            </Container>
+        </>
     )
 }
 

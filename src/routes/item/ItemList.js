@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
+import Header from "../../components/Header";
 
 function ItemList({ isLogin, setLogin }) {
 
@@ -42,32 +43,34 @@ function ItemList({ isLogin, setLogin }) {
     }, [])
 
     return (
-        <div>
-            <h1>제품목록</h1>
-            {
-                isLoading === false ?
-                    <Table responsive striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>제품</th>
-                                <th>가격</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map(function (i) {
-                                return (
-                                    <tr>
-                                        <td>{i.name}</td>
-                                        <td>{i.price}</td>
-                                        <td><Link to={`/items/${i.id}`}>상세보기</Link></td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table> : null
-            }
-        </div>
+        <>
+            <Header title={'제품목록'} />
+            <Container>
+                {
+                    isLoading === false ?
+                        <Table responsive striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>제품</th>
+                                    <th>가격</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {items.map(function (i) {
+                                    return (
+                                        <tr>
+                                            <td>{i.name}</td>
+                                            <td>{i.price}</td>
+                                            <td><Link to={`/items/${i.id}`}>상세보기</Link></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table> : null
+                }
+            </Container>
+        </>
     )
 }
 

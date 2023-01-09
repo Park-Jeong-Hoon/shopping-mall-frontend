@@ -34,8 +34,8 @@ function Navigator({ memberName, isLogin, setLogin }) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav className="me-auto" onSelect={(selectedKey) => navigate(`/${selectedKey}`)}>
-                        <Nav.Link eventKey="items">상품목록</Nav.Link>
-                        <Nav.Link eventKey="items/add">상품등록</Nav.Link>
+                        <Nav.Link eventKey="items">제품목록</Nav.Link>
+                        <Nav.Link eventKey="items/add">제품등록</Nav.Link>
                         <Nav.Link eventKey="orders">주문목록</Nav.Link>
                         {
                             isLogin ?
@@ -44,7 +44,10 @@ function Navigator({ memberName, isLogin, setLogin }) {
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                 </NavDropdown> :
-                                <Nav.Link eventKey="login">로그인</Nav.Link>
+                                <>
+                                    <Nav.Link eventKey="login">로그인</Nav.Link>
+                                    <Nav.Link eventKey="join">회원가입</Nav.Link>
+                                </>
                         }
                     </Nav>
                 </Navbar.Collapse>

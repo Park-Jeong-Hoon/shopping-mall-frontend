@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
+import Header from "../../components/Header";
 
 function ItemDetail({ isLogin, setLogin }) {
 
@@ -44,41 +45,43 @@ function ItemDetail({ isLogin, setLogin }) {
     }, [])
 
     return (
-        <div>
-            <h1>제품상세</h1>
-            <hr />
-            {
-                isLoading === false ?
-                    <div>
-                        <Table responsive striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>제품</th>
-                                    <th>{item.name}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>가격</td>
-                                    <td>{item.price}</td>
-                                </tr>
-                                <tr>
-                                    <td>재고</td>
-                                    <td>{item.stockQuantity}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                        <Button onClick={() => {
-                            navigate("/orders/payment", {
-                                state: {
-                                    itemList: [item]
-                                }
-                            })
-                        }}>주문하기</Button>
-                    </div>
-                    : null
-            }
-        </div>
+        <>
+            <Header title={'제품상세'} />
+            <Container>
+                <hr />
+                {
+                    isLoading === false ?
+                        <div>
+                            <Table responsive striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>제품</th>
+                                        <th>{item.name}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>가격</td>
+                                        <td>{item.price}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>재고</td>
+                                        <td>{item.stockQuantity}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            <Button onClick={() => {
+                                navigate("/orders/payment", {
+                                    state: {
+                                        itemList: [item]
+                                    }
+                                })
+                            }}>주문하기</Button>
+                        </div>
+                        : null
+                }
+            </Container>
+        </>
     )
 }
 

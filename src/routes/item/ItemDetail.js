@@ -40,6 +40,35 @@ function ItemDetail({ isLogin, setLogin }) {
         }).catch(error => console.error('Error:', error));
     }
 
+    const keepItem = async (id) => {
+        setLoading(true);
+        await axios(
+            {
+                url: `/item/keep`,
+                method: 'post',
+                baseURL: `${process.env.REACT_APP_BACKEND}`,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                data: id
+            }
+        ).then(function (response) {
+            let jwtHeader = response.headers.get("Authorization")
+            let jwtToken = '';
+            console.log(response);
+            if (jwtHeader !== undefined) {
+                if (jwtHeader.startsWith('Bearer ')) {
+                    jwtToken = jwtHeader.replace('Bearer ', '');
+                }
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${jwtToken}`;
+            }
+            setLoading(false);
+        }).catch(error => console.error('Error:', error));
+    }
+
     useEffect(() => {
         getItem();
     }, [])
@@ -76,7 +105,10 @@ function ItemDetail({ isLogin, setLogin }) {
                                         itemList: [item]
                                     }
                                 })
-                            }}>주문하기</Button>
+                            }}>주문하기</Button>{' '}
+                            <Button variant='secondary' onClick={() => {
+                                keepItem(item.id);
+                            }}>장바구니담기</Button>
                         </div>
                         : null
                 }

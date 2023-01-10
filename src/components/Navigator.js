@@ -37,6 +37,7 @@ function Navigator({ memberName, isLogin, setLogin }) {
                         <Nav.Link eventKey="items">제품목록</Nav.Link>
                         <Nav.Link eventKey="items/add">제품등록</Nav.Link>
                         <Nav.Link eventKey="orders">주문목록</Nav.Link>
+                        <Nav.Link eventKey="basket">장바구니</Nav.Link>
                         {
                             isLogin ?
                                 <NavDropdown title={`${memberName}님`} id="basic-nav-dropdown">

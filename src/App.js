@@ -9,6 +9,7 @@ import Login from './routes/login/Login';
 import ItemList from './routes/item/ItemList';
 import ItemDetail from './routes/item/ItemDetail';
 import ItemAdd from './routes/item/ItemAdd';
+import ItemBasket from './routes/item/ItemBasket';
 import OrderList from './routes/order/OrderList';
 import OrderDetail from './routes/order/OrderDetail';
 import OrderPayment from './routes/order/OrderPayment';
@@ -66,6 +67,7 @@ function App() {
             <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/basket' element={<ItemBasket isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders/:id' element={<OrderDetail isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders/payment' element={<OrderPayment isLogin={isLogin} setLogin={setLogin} />} />

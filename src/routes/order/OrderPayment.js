@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import OrderItemInfo from "./OrderItemInfo";
 
 function OrderPayment() {
 
@@ -24,12 +25,7 @@ function OrderPayment() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                data: [
-                    {
-                        "id": itemList[0].id,
-                        "quantity": e.target[2].value
-                    }
-                ]
+                data: itemList
             }
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
@@ -50,11 +46,26 @@ function OrderPayment() {
     }
 
     useEffect(() => {
-        setItemList(location.state.itemList);
+        let items = location.state.itemList;
+        for (let i = 0; i < items.length; i++) {
+            items[i].quantity = 0;
+        }
+        setItemList(items);
     }, []);
 
-    const calculatePrice = (e) => {
-        setTotalPrice(e.target.value * itemList[0].price);
+    const controlQuantity = (e, id) => {
+        console.log(e.target.value, ",", id)
+        let findIndex = itemList.findIndex(item => item.id === id)
+        let copiedItemList = [...itemList];
+        copiedItemList[findIndex].quantity = e.target.value;
+
+        setItemList(copiedItemList);
+
+        let totalPrice = 0;
+        for (let i = 0; i < copiedItemList.length; i++) {
+            totalPrice += copiedItemList[i].price * copiedItemList[i].quantity;
+        }
+        setTotalPrice(totalPrice);
     }
 
     return (
@@ -62,21 +73,12 @@ function OrderPayment() {
             <Header title={"주문결제"} />
             <Container>
                 <Form onSubmit={doOrder}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>상품명</Form.Label>
-                        <Form.Control type="text" defaultValue={itemList.length !== 0 ? itemList[0].name : ''} readOnly />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>금액</Form.Label>
-                        <Form.Control type="number" defaultValue={itemList.length !== 0 ? itemList[0].price : ''} readOnly />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail" onChange={calculatePrice}>
-                        <Form.Label>수량</Form.Label>
-                        <Form.Control type="number" placeholder="상품의 수량을 적어주세요" />
-                        <Form.Text>
-                            {`수량이 재고보다 많을 경우 주문이 이뤄지지 않습니다.`}
-                        </Form.Text>
-                    </Form.Group>
+                    {itemList.map(function (itemInfo) {
+                        return (
+                            <OrderItemInfo key={itemInfo.id} itemInfo={itemInfo} controlQuantity={controlQuantity} />
+                        );
+                    })}
+
                     <h3>{`총액: ${totalPrice}`}</h3>
                     <Button variant="primary" type="submit">
                         결제하기

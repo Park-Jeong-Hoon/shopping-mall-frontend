@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -33,7 +33,7 @@ function Navigator({ memberName, isLogin, setLogin }) {
                 <Navbar.Brand href="/" onClick={(e) => { e.preventDefault(); navigate("/") }}>홈</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                    <Nav className="me-auto" onSelect={(selectedKey) => navigate(`/${selectedKey}`)}>
+                    <Nav className="justify-content-end" onSelect={(selectedKey) => navigate(`/${selectedKey}`)}>
                         <Nav.Link eventKey="items">제품목록</Nav.Link>
                         <Nav.Link eventKey="items/add">제품등록</Nav.Link>
                         <Nav.Link eventKey="orders">주문목록</Nav.Link>
@@ -51,6 +51,14 @@ function Navigator({ memberName, isLogin, setLogin }) {
                                 </>
                         }
                     </Nav>
+                    <Form className="d-flex">
+                        <Form.Control
+                            type="search"
+                            placeholder="제품검색"
+                            className="me-1"
+                            aria-label="Search"
+                        />
+                    </Form>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

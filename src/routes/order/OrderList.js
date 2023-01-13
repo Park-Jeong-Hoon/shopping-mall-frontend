@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Container, Table } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 function OrderList({ isLogin, setLogin }) {
+
+    const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
@@ -50,6 +52,7 @@ function OrderList({ isLogin, setLogin }) {
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>주문상태</th>
                                     <th>금액</th>
                                     <th>주문날짜</th>
@@ -60,10 +63,11 @@ function OrderList({ isLogin, setLogin }) {
                                 {orders.map(function (o) {
                                     return (
                                         <tr>
+                                            <td>{o.id}</td>
                                             <td>{o.orderStatus}</td>
                                             <td>{o.price}</td>
                                             <td>{o.orderDate}</td>
-                                            <td><Link to={`/orders/${o.id}`}>상세보기</Link></td>
+                                            <td><Button size="sm" onClick={() => {navigate(`/orders/${o.id}`)}}>상세보기</Button></td>
                                         </tr>
                                     );
                                 })}

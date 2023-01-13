@@ -54,35 +54,31 @@ function OrderDetail() {
                             <Table responsive striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th>제품</th>
-                                        <th>{orderInfo[0].itemName}</th>
+                                        <th>#</th>
+                                        <th>{orderInfo[0].orderId}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>제품</td>
+                                        <td>{orderInfo[0].itemName}</td>
+                                    </tr>
                                     <tr>
                                         <td>가격</td>
                                         <td>{orderInfo[0].price}원</td>
                                     </tr>
-                                </tbody>
-                                <thead>
                                     <tr>
                                         <th>수량</th>
                                         <th>{orderInfo[0].quantity}</th>
                                     </tr>
-                                </thead>
-                                <thead>
                                     <tr>
                                         <th>주문상태</th>
                                         <th>{orderInfo[0].orderStatus}</th>
                                     </tr>
-                                </thead>
-                                <tbody>
                                     <tr>
                                         <td>총액</td>
                                         <td>{orderInfo[0].totalPrice}원</td>
                                     </tr>
-                                </tbody>
-                                <tbody>
                                     <tr>
                                         <td>주문날짜</td>
                                         <td>{orderInfo[0].orderDate}</td>

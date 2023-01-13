@@ -26,6 +26,12 @@ function Navigator({ memberName, isLogin, setLogin }) {
             }
         }).catch(error => console.error('Error:', error));
     }
+    
+    const searchItem = async (e) => {
+        e.preventDefault();
+        navigate(`/items/search/${e.target[0].value}`)
+        
+    }
 
     return (
         <Navbar bg="light" varient="light" expand="lg">
@@ -51,7 +57,7 @@ function Navigator({ memberName, isLogin, setLogin }) {
                                 </>
                         }
                     </Nav>
-                    <Form className="d-flex">
+                    <Form className="d-flex" onSubmit={searchItem}>
                         <Form.Control
                             type="search"
                             placeholder="제품검색"

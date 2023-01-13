@@ -38,6 +38,7 @@ function ItemBasketInfo({ itemInfo }) {
 
     return (
         <tr>
+            <td>{itemInfo.id}</td>
             <td>{itemInfo.name}</td>
             <td>{itemInfo.price}</td>
             <td>{itemInfo.stockQuantity}</td>

@@ -52,6 +52,7 @@ function ItemBasket() {
                             <Table responsive striped bordered hover>
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>제품명</th>
                                         <th>금액</th>
                                         <th>재고</th>

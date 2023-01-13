@@ -25,7 +25,6 @@ function ItemDetail({ isLogin, setLogin }) {
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
-            console.log(response);
             if (jwtHeader !== undefined) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
@@ -56,7 +55,6 @@ function ItemDetail({ isLogin, setLogin }) {
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
-            console.log(response);
             if (jwtHeader !== undefined) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
@@ -84,7 +82,11 @@ function ItemDetail({ isLogin, setLogin }) {
                             <Table responsive striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th>제품</th>
+                                        <th>#</th>
+                                        <th>{item.id}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>제품명</th>
                                         <th>{item.name}</th>
                                     </tr>
                                 </thead>

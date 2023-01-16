@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Button, Container, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
+import OrderDetailCard from "./OrderDetailCard";
 
 function OrderDetail() {
     const navigate = useNavigate();
@@ -41,13 +42,41 @@ function OrderDetail() {
 
     useEffect(() => {
         getItem();
-    }, [])
+    }, [isLoading])
+
+    const cancelOrder = async () => {
+        setLoading(true);
+        await axios(
+            {
+                url: `/order/cancel`,
+                method: 'post',
+                baseURL: `${process.env.REACT_APP_BACKEND}`,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                data: orderInfo[0].orderId
+            }
+        ).then(function (response) {
+            let jwtHeader = response.headers.get("Authorization")
+            let jwtToken = '';
+            if (jwtHeader !== undefined) {
+                if (jwtHeader.startsWith('Bearer ')) {
+                    jwtToken = jwtHeader.replace('Bearer ', '');
+                }
+                console.log(jwtToken)
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${jwtToken}`;
+            }
+            setLoading(false);
+        }).catch(error => console.error('Error:', error));
+    }
 
     return (
         <>
             <Header title={"주문상세"} />
             <Container>
-                <hr />
                 {
                     isLoading === false ?
                         <div>
@@ -59,18 +88,6 @@ function OrderDetail() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>제품</td>
-                                        <td>{orderInfo[0].itemName}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>가격</td>
-                                        <td>{orderInfo[0].price}원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>수량</th>
-                                        <th>{orderInfo[0].quantity}</th>
-                                    </tr>
                                     <tr>
                                         <th>주문상태</th>
                                         <th>{orderInfo[0].orderStatus}</th>
@@ -85,6 +102,17 @@ function OrderDetail() {
                                     </tr>
                                 </tbody>
                             </Table>
+                            {
+                                orderInfo.map(function (o) {
+                                    return (
+                                        <OrderDetailCard orderItemInfo={o} />
+                                    );
+                                })
+                            }
+                            {
+                                orderInfo[0].orderStatus === "CANCEL" ? null :
+                                    <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
+                            }
                         </div>
                         : null
                 }

@@ -1,0 +1,79 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Button, Container, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+function Profile({ isLogin, setLogin }) {
+
+    const [isLoading, setLoading] = useState(true);
+    const [profileInfo, setProfileInfo] = useState(null);
+    const navigate = useNavigate();
+
+    const getProfile = async () => {
+        await axios(
+            {
+                url: `/member/profile`,
+                method: 'get',
+                baseURL: `${process.env.REACT_APP_BACKEND}`,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        ).then(function (response) {
+            let jwtHeader = response.headers.get("Authorization")
+            let jwtToken = '';
+            console.log(response);
+            if (jwtHeader !== undefined) {
+                if (jwtHeader.startsWith('Bearer ')) {
+                    jwtToken = jwtHeader.replace('Bearer ', '');
+                }
+                console.log(jwtToken)
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${jwtToken}`;
+            }
+            setLoading(false);
+            setProfileInfo(response.data);
+        }).catch(error => console.error('Error:', error));
+    }
+
+    useEffect(() => {
+        getProfile();
+    }, [isLoading])
+
+    return (
+        <Container>
+            {
+                isLoading === false ?
+                    <div>
+                        <Table responsive striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>아이디</th>
+                                    <th>{profileInfo.username}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>{profileInfo.name}</th>
+                                </tr>
+                                <tr>
+                                    <td>이메일</td>
+                                    <td>{profileInfo.email}</td>
+                                </tr>
+                                <tr>
+                                    <td>휴대폰번호</td>
+                                    <td>{profileInfo.phone}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                        <Button onClick={() => {navigate("/profile-edit")}}>프로필 수정</Button>
+                    </div> : null
+            }
+        </Container>
+    )
+}
+
+export default Profile;

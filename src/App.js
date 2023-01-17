@@ -13,6 +13,8 @@ import ItemBasket from './routes/item/ItemBasket';
 import OrderList from './routes/order/OrderList';
 import OrderDetail from './routes/order/OrderDetail';
 import OrderPayment from './routes/order/OrderPayment';
+import Profile from './routes/profile/Profile';
+import ProfileEdit from './routes/profile/ProfileEdit';
 import axios from 'axios';
 import { ThemeProvider } from 'react-bootstrap';
 
@@ -72,6 +74,8 @@ function App() {
             <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders/:id' element={<OrderDetail isLogin={isLogin} setLogin={setLogin} />} />
             <Route path='/orders/payment' element={<OrderPayment isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/profile' element={<Profile isLogin={isLogin} setLogin={setLogin} />} />
+            <Route path='/profile-edit' element={<ProfileEdit isLogin={isLogin} setLogin={setLogin} />} />
           </Routes>
         </div>
       </BrowserRouter>

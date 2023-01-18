@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Form, Table } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 function ProfileEdit({ isLogin, setLogin }) {
 
@@ -67,7 +68,6 @@ function ProfileEdit({ isLogin, setLogin }) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
@@ -81,36 +81,38 @@ function ProfileEdit({ isLogin, setLogin }) {
     }
 
     return (
-        <Container>
-            {
-                isLogin === false ?
-                    <Navigate to={"/"} /> :
-
-                    isLoading ?
-                        <div></div> :
-                        <Form onSubmit={doEdit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>아이디</Form.Label>
-                                <Form.Control type="text" defaultValue={profileInfo.username} readOnly />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>이름</Form.Label>
-                                <Form.Control type="text" defaultValue={profileInfo.name} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>이메일</Form.Label>
-                                <Form.Control type="text" defaultValue={profileInfo.email} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>휴대폰 번호</Form.Label>
-                                <Form.Control type="text" defaultValue={profileInfo.phone} />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
-                                저장
-                            </Button>
-                        </Form>
-            }
-        </Container>
+        <>
+            <Header title={"내정보 수정"} />
+            <Container>
+                {
+                    isLogin === false ?
+                        <Navigate to={"/"} /> :
+                        isLoading ?
+                            <div></div> :
+                            <Form onSubmit={doEdit}>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>아이디</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.username} readOnly />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>이름</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.name} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>이메일</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.email} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>휴대폰 번호</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.phone} />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    저장
+                                </Button>
+                            </Form>
+                }
+            </Container>
+        </>
     )
 }
 

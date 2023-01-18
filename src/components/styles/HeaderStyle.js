@@ -9,5 +9,4 @@ export const HeaderStyle = styled.header`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: aliceblue;
 `

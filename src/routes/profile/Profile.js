@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 function Profile({ isLogin, setLogin }) {
 
@@ -23,12 +24,10 @@ function Profile({ isLogin, setLogin }) {
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
-            console.log(response);
             if (jwtHeader !== undefined) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
@@ -43,36 +42,39 @@ function Profile({ isLogin, setLogin }) {
     }, [isLoading])
 
     return (
-        <Container>
-            {
-                isLoading === false ?
-                    <div>
-                        <Table responsive striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>아이디</th>
-                                    <th>{profileInfo.username}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>이름</th>
-                                    <th>{profileInfo.name}</th>
-                                </tr>
-                                <tr>
-                                    <td>이메일</td>
-                                    <td>{profileInfo.email}</td>
-                                </tr>
-                                <tr>
-                                    <td>휴대폰번호</td>
-                                    <td>{profileInfo.phone}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                        <Button onClick={() => {navigate("/profile-edit")}}>프로필 수정</Button>
-                    </div> : null
-            }
-        </Container>
+        <>
+            <Header title={"내정보"} />
+            <Container>
+                {
+                    isLoading === false ?
+                        <div>
+                            <Table responsive striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>아이디</th>
+                                        <th>{profileInfo.username}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>이름</th>
+                                        <th>{profileInfo.name}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>이메일</td>
+                                        <td>{profileInfo.email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>휴대폰번호</td>
+                                        <td>{profileInfo.phone}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
+                        </div> : null
+                }
+            </Container>
+        </>
     )
 }
 

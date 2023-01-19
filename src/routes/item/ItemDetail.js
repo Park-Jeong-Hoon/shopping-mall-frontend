@@ -99,6 +99,13 @@ function ItemDetail({ isLogin, setLogin }) {
                                         <td>재고</td>
                                         <td>{item.stockQuantity}</td>
                                     </tr>
+                                    <tr>
+                                        <td>이미지</td>
+                                        <td>
+                                            <img src={`${process.env.REACT_APP_IMGSRC}/${item.imageName}`}
+                                                style={{ width: "200px", height: "150px" }} />
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </Table>
                             <Button onClick={() => {

@@ -18,6 +18,13 @@ function OrderDetailCard({ orderItemInfo }) {
                         {orderItemInfo.quantity}
                     </Card.Text>
                 </Card.Body>
+                <Card.Body>
+                    <Card.Title>제품사진</Card.Title>
+                    <Card.Text>
+                        <img src={`${process.env.REACT_APP_IMGSRC}/${orderItemInfo.imageName}`}
+                            style={{ width: "200px", height: "150px" }} />
+                    </Card.Text>
+                </Card.Body>
             </Card>
             <br />
         </div>

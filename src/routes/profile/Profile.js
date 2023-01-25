@@ -22,6 +22,7 @@ function Profile({ isLogin, setLogin }) {
                 },
             }
         ).then(function (response) {
+            console.log(response.data)
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
             if (jwtHeader !== undefined) {
@@ -67,6 +68,14 @@ function Profile({ isLogin, setLogin }) {
                                     <tr>
                                         <td>휴대폰번호</td>
                                         <td>{profileInfo.phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>주소</td>
+                                        <td>{`${profileInfo.address.region} ${profileInfo.address.road} ${profileInfo.address.home}`}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>우편번호</td>
+                                        <td>{profileInfo.address.zipcode}</td>
                                     </tr>
                                 </tbody>
                             </Table>

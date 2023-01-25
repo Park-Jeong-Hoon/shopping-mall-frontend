@@ -58,7 +58,13 @@ function ProfileEdit({ isLogin, setLogin }) {
                     username: e.target[0].value,
                     name: e.target[1].value,
                     email: e.target[2].value,
-                    phone: e.target[3].value
+                    phone: e.target[3].value,
+                    address: {
+                        region: e.target[4].value,
+                        road: e.target[5].value,
+                        home: e.target[6].value,
+                        zipcode: e.target[7].value
+                    }
                 }
             }
         ).then(function (response) {
@@ -105,6 +111,22 @@ function ProfileEdit({ isLogin, setLogin }) {
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>휴대폰 번호</Form.Label>
                                     <Form.Control type="text" defaultValue={profileInfo.phone} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>주소(지역)</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.address.region} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>주소(도로명)</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.address.road} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>주소(상세주소)</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.address.home} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>우편번호</Form.Label>
+                                    <Form.Control type="text" defaultValue={profileInfo.address.zipcode} />
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     저장

@@ -102,7 +102,7 @@ function ItemDetail({ isLogin, setLogin }) {
                                     <tr>
                                         <td>이미지</td>
                                         <td>
-                                            <img src={`${process.env.REACT_APP_IMGSRC}/${item.imageName}`}
+                                            <img src={`${item.imageName}`}
                                                 style={{ width: "200px", height: "150px" }} />
                                         </td>
                                     </tr>

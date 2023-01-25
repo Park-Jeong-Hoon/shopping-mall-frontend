@@ -21,7 +21,7 @@ function OrderDetailCard({ orderItemInfo }) {
                 <Card.Body>
                     <Card.Title>제품사진</Card.Title>
                     <Card.Text>
-                        <img src={`${process.env.REACT_APP_IMGSRC}/${orderItemInfo.imageName}`}
+                        <img src={`${orderItemInfo.imageName}`}
                             style={{ width: "200px", height: "150px" }} />
                     </Card.Text>
                 </Card.Body>

@@ -29,6 +29,12 @@ function Join({ isLogin, setLogin }) {
                     name: e.target[2].value,
                     phone: e.target[3].value,
                     email: e.target[4].value,
+                    address: {
+                        region: e.target[5].value,
+                        road: e.target[6].value,
+                        home: e.target[7].value,
+                        zipcode: e.target[8].value
+                    }
                 }
             }
         ).then(function (response) {
@@ -69,6 +75,22 @@ function Join({ isLogin, setLogin }) {
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>이메일</Form.Label>
                                 <Form.Control type="text" placeholder="이메일" />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>주소(지역)</Form.Label>
+                                <Form.Control type="text" />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>주소(도로명)</Form.Label>
+                                <Form.Control type="text" />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>주소(상세주소)</Form.Label>
+                                <Form.Control type="text" />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>우편번호</Form.Label>
+                                <Form.Control type="text" />
                             </Form.Group>
                             <Button variant="primary" type="submit">
                                 회원가입

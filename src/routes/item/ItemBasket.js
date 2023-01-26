@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import ItemBasketInfo from "./ItemBasketInfo";
 
-function ItemBasket() {
+function ItemBasket({ isLogin, setLogin }) {
 
     const navigate = useNavigate();
     const [basket, setBasket] = useState(null);
@@ -43,38 +43,39 @@ function ItemBasket() {
     }, [])
 
     return (
-        <>
-            <Header title={'장바구니목록'} />
-            <Container>
-                {
-                    isLoading === false ?
-                        <>
-                            <Table responsive striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>제품명</th>
-                                        <th>금액</th>
-                                        <th>재고</th>
-                                        <th>결제</th>
-                                        <th>삭제</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {basket.map(function (b) {
-                                        return (
-                                            <ItemBasketInfo key={b.id} itemInfo={b} />
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
-                            <Button variant="primary" onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
-                                전체결제
-                            </Button>
-                        </> : null
-                }
-            </Container>
-        </>
+        isLogin ?
+            <>
+                <Header title={'장바구니목록'} />
+                <Container>
+                    {
+                        isLoading === false ?
+                            <>
+                                <Table responsive striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>제품명</th>
+                                            <th>금액</th>
+                                            <th>재고</th>
+                                            <th>결제</th>
+                                            <th>삭제</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {basket.map(function (b) {
+                                            return (
+                                                <ItemBasketInfo key={b.id} itemInfo={b} />
+                                            );
+                                        })}
+                                    </tbody>
+                                </Table>
+                                <Button variant="primary" onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
+                                    전체결제
+                                </Button>
+                            </> : null
+                    }
+                </Container>
+            </> : <Navigate to={"/"} />
     )
 }
 

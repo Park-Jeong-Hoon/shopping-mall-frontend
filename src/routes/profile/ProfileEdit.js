@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 function ProfileEdit({ isLogin, setLogin }) {
 
     const [isLoading, setLoading] = useState(true);
+    const [isSaveLoading, setSaveLoading] = useState(false);
     const [profileInfo, setProfileInfo] = useState(null);
     const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ function ProfileEdit({ isLogin, setLogin }) {
 
     const doEdit = async (e) => {
         e.preventDefault();
+        setSaveLoading(true);
         await axios(
             {
                 url: `/member/profile/edit`,
@@ -82,7 +84,7 @@ function ProfileEdit({ isLogin, setLogin }) {
                 setProfileInfo(response.data);
                 navigate("/profile")
             }
-            setLoading(false);
+            setSaveLoading(false);
         }).catch(error => console.error('Error:', error));
     }
 
@@ -128,9 +130,22 @@ function ProfileEdit({ isLogin, setLogin }) {
                                     <Form.Label>우편번호</Form.Label>
                                     <Form.Control type="text" defaultValue={profileInfo.address.zipcode} />
                                 </Form.Group>
-                                <Button variant="primary" type="submit">
-                                    저장
-                                </Button>
+                                {
+                                    isSaveLoading ?
+                                        <Button variant="primary" disabled>
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            {" 저장..."}
+                                        </Button> :
+                                        <Button variant="primary" type="submit">
+                                            저장
+                                        </Button>
+                                }
                             </Form>
                 }
             </Container>

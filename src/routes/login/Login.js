@@ -2,13 +2,17 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import Header from "../../components/Header";
+import { useState } from "react";
 
 function Login({ isLogin, setLogin, setMemberName }) {
 
+    const [isLoading, setLoading] = useState(false);
+
     const doLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
         await axios(
             {
                 url: '/member/login',
@@ -32,6 +36,7 @@ function Login({ isLogin, setLogin, setMemberName }) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
                 setLogin(true);
+                setLoading(false);
                 setMemberName(response.data.name);
                 axios.defaults.headers.common[
                     "Authorization"
@@ -59,9 +64,22 @@ function Login({ isLogin, setLogin, setMemberName }) {
                                 <Form.Label>비밀번호</Form.Label>
                                 <Form.Control type="password" placeholder="비밀번호" />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
-                                로그인
-                            </Button>
+                            {
+                                isLoading ?
+                                    <Button variant="primary" disabled>
+                                        <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        {" 로그인..."}
+                                    </Button> :
+                                    <Button variant="primary" type="submit">
+                                        로그인
+                                    </Button>
+                            }
                         </Form>
                 }
             </Container>

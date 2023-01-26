@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import Header from "../../components/Header";
 
-function Join({ isLogin, setLogin }) {
+function Join({ isLogin }) {
 
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(false);
@@ -92,9 +92,22 @@ function Join({ isLogin, setLogin }) {
                                 <Form.Label>우편번호</Form.Label>
                                 <Form.Control type="text" />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
-                                회원가입
-                            </Button>
+                            {
+                                isLoading ?
+                                    <Button variant="primary" disabled>
+                                        <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        {" 회원가입..."}
+                                    </Button> :
+                                    <Button variant="primary" type="submit">
+                                        회원가입
+                                    </Button>
+                            }
                         </Form>
                 }
             </Container>

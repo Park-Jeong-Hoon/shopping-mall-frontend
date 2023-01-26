@@ -2,8 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Container, Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
 
 function ItemAdd({ isLogin, setLogin }) {
@@ -23,7 +23,7 @@ function ItemAdd({ isLogin, setLogin }) {
         setLoading(true);
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("json", 
+        formData.append("json",
             new Blob([
                 JSON.stringify(
                     {
@@ -33,7 +33,7 @@ function ItemAdd({ isLogin, setLogin }) {
                     }
                 )], { type: "application/json" })
         )
-        
+
         await axios(
             {
                 url: '/item/add',
@@ -62,32 +62,46 @@ function ItemAdd({ isLogin, setLogin }) {
     }
 
     return (
-        <>
-            <Header title={'제품등록'} />
-            <Container>
-                <Form onSubmit={addItem}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>제품명</Form.Label>
-                        <Form.Control type="text" placeholder="상품의 이름을 적어주세요."  />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>금액</Form.Label>
-                        <Form.Control type="number" placeholder="상품의 금액을 적어주세요" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>수량</Form.Label>
-                        <Form.Control type="number" placeholder="상품의 수량을 적어주세요" />
-                    </Form.Group>
-                    <Form.Group controlId="formFile" className="mb-3">
-                        <Form.Label>제품사진</Form.Label>
-                        <Form.Control type="file" onChange={handleChangeFile}/>
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        등록신청
-                    </Button>
-                </Form>
-            </Container>
-        </>
+        isLogin ?
+            <>
+                <Header title={'제품등록'} />
+                <Container>
+                    <Form onSubmit={addItem}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>제품명</Form.Label>
+                            <Form.Control type="text" placeholder="상품의 이름을 적어주세요." required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>금액</Form.Label>
+                            <Form.Control type="number" placeholder="상품의 금액을 적어주세요" required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>수량</Form.Label>
+                            <Form.Control type="number" placeholder="상품의 수량을 적어주세요" required />
+                        </Form.Group>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>제품사진</Form.Label>
+                            <Form.Control type="file" onChange={handleChangeFile} required />
+                        </Form.Group>
+                        {
+                            isLoading ?
+                                <Button variant="primary" disabled>
+                                    <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                    />
+                                    {" 등록신청..."}
+                                </Button> :
+                                <Button variant="primary" type="submit">
+                                    등록신청
+                                </Button>
+                        }
+                    </Form>
+                </Container>
+            </> : <Navigate to={"/"} />
     )
 }
 

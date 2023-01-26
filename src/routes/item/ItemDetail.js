@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Button, Container, Spinner, Table } from 'react-bootstrap';
 import Header from "../../components/Header";
 
 function ItemDetail({ isLogin, setLogin }) {
@@ -10,6 +10,7 @@ function ItemDetail({ isLogin, setLogin }) {
     const { id } = useParams();
     const [item, setItem] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [isBasketLoading, setBasketLoading] = useState(false);
 
     const getItem = async () => {
         await axios(
@@ -40,7 +41,7 @@ function ItemDetail({ isLogin, setLogin }) {
     }
 
     const keepItem = async (id) => {
-        setLoading(true);
+        setBasketLoading(true);
         await axios(
             {
                 url: `/item/keep`,
@@ -63,7 +64,7 @@ function ItemDetail({ isLogin, setLogin }) {
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
-            setLoading(false);
+            setBasketLoading(false);
         }).catch(error => console.error('Error:', error));
     }
 
@@ -108,16 +109,35 @@ function ItemDetail({ isLogin, setLogin }) {
                                     </tr>
                                 </tbody>
                             </Table>
-                            <Button onClick={() => {
-                                navigate("/orders/payment", {
-                                    state: {
-                                        itemList: [item]
-                                    }
-                                })
-                            }}>주문하기</Button>{' '}
-                            <Button variant='secondary' onClick={() => {
-                                keepItem(item.id);
-                            }}>장바구니담기</Button>
+                            {
+                                isLogin ?
+                                    <>
+                                        <Button onClick={() => {
+                                            navigate("/orders/payment", {
+                                                state: {
+                                                    itemList: [item]
+                                                }
+                                            })
+                                        }}>주문하기</Button>{' '}
+                                        {
+                                            isBasketLoading ?
+                                                <Button variant="secondary" disabled>
+                                                    <Spinner
+                                                        as="span"
+                                                        animation="border"
+                                                        size="sm"
+                                                        role="status"
+                                                        aria-hidden="true"
+                                                    />
+                                                    {" 장바구니담기..."}
+                                                </Button> :
+                                                <Button variant='secondary' onClick={() => {
+                                                    keepItem(item.id);
+                                                }}>장바구니담기</Button>
+                                        }
+                                    </> : null
+                            }
+
                         </div>
                         : null
                 }

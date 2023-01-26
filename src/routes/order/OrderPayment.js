@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Button, Container, Form, Spinner } from "react-bootstrap";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import OrderItemInfo from "./OrderItemInfo";
 
-function OrderPayment() {
+function OrderPayment({ isLogin, setLogin }) {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -46,6 +46,10 @@ function OrderPayment() {
     }
 
     useEffect(() => {
+        if (location.state == null) {
+            navigate("/");
+            return;
+        }
         let items = location.state.itemList;
         for (let i = 0; i < items.length; i++) {
             items[i].quantity = 0;
@@ -69,23 +73,37 @@ function OrderPayment() {
     }
 
     return (
-        <>
-            <Header title={"주문결제"} />
-            <Container>
-                <Form onSubmit={doOrder}>
-                    {itemList.map(function (itemInfo) {
-                        return (
-                            <OrderItemInfo key={itemInfo.id} itemInfo={itemInfo} controlQuantity={controlQuantity} />
-                        );
-                    })}
+        isLogin ?
+            <>
+                <Header title={"주문결제"} />
+                <Container>
+                    <Form onSubmit={doOrder}>
+                        {itemList.map(function (itemInfo) {
+                            return (
+                                <OrderItemInfo key={itemInfo.id} itemInfo={itemInfo} controlQuantity={controlQuantity} />
+                            );
+                        })}
 
-                    <h3>{`총액: ${totalPrice}`}</h3>
-                    <Button variant="primary" type="submit">
-                        결제하기
-                    </Button>
-                </Form>
-            </Container>
-        </>
+                        <h3>{`총액: ${totalPrice}`}</h3>
+                        {
+                            isLoading ?
+                                <Button variant="primary" disabled>
+                                    <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                    />
+                                    {" 결제하기..."}
+                                </Button> :
+                                <Button variant="primary" type="submit">
+                                    결제하기
+                                </Button>
+                        }
+                    </Form>
+                </Container>
+            </> : <Navigate to={"/"} />
     )
 }
 

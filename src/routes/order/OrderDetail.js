@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import OrderDetailCard from "./OrderDetailCard";
 
-function OrderDetail() {
+function OrderDetail({ isLogin, setLogin }) {
     const navigate = useNavigate();
     const { id } = useParams();
     const [orderInfo, setOrderInfo] = useState([]);
@@ -74,50 +74,51 @@ function OrderDetail() {
     }
 
     return (
-        <>
-            <Header title={"주문상세"} />
-            <Container>
-                {
-                    isLoading === false ?
-                        <div>
-                            <Table responsive striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{orderInfo[0].orderId}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>주문상태</th>
-                                        <th>{orderInfo[0].orderStatus}</th>
-                                    </tr>
-                                    <tr>
-                                        <td>총액</td>
-                                        <td>{orderInfo[0].totalPrice}원</td>
-                                    </tr>
-                                    <tr>
-                                        <td>주문날짜</td>
-                                        <td>{orderInfo[0].orderDate}</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                            {
-                                orderInfo.map(function (o) {
-                                    return (
-                                        <OrderDetailCard orderItemInfo={o} />
-                                    );
-                                })
-                            }
-                            {
-                                orderInfo[0].orderStatus === "CANCEL" ? null :
-                                    <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
-                            }
-                        </div>
-                        : null
-                }
-            </Container>
-        </>
+        isLogin ?
+            <>
+                <Header title={"주문상세"} />
+                <Container>
+                    {
+                        isLoading === false ?
+                            <div>
+                                <Table responsive striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{orderInfo[0].orderId}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>주문상태</th>
+                                            <th>{orderInfo[0].orderStatus}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>총액</td>
+                                            <td>{orderInfo[0].totalPrice}원</td>
+                                        </tr>
+                                        <tr>
+                                            <td>주문날짜</td>
+                                            <td>{orderInfo[0].orderDate}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                                {
+                                    orderInfo.map(function (o) {
+                                        return (
+                                            <OrderDetailCard orderItemInfo={o} />
+                                        );
+                                    })
+                                }
+                                {
+                                    orderInfo[0].orderStatus === "CANCEL" ? null :
+                                        <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
+                                }
+                            </div>
+                            : null
+                    }
+                </Container>
+            </> : <Navigate to={"/"} />
     )
 }
 

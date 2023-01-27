@@ -21,6 +21,7 @@ import { ThemeProvider } from 'react-bootstrap';
 function App() {
 
   const [isLogin, setLogin] = useState(false);
+  const [isAppLoad, setAppLoad] = useState(false);
   const [memberName, setMemberName] = useState({});
 
   const getMemberName = async () => {
@@ -48,8 +49,14 @@ function App() {
           "Authorization"
         ] = `Bearer ${jwtToken}`;
         setMemberName(response.data);
+        setAppLoad(true);
+      } else {
+        setAppLoad(true);
       }
-    }).catch(error => console.error('Error:', error));
+    }).catch(error => {
+      console.error('Error:', error);
+      setAppLoad(true);
+    });
   }
 
   useEffect(() => {
@@ -62,21 +69,24 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Navigator memberName={memberName} isLogin={isLogin} setLogin={setLogin} />
-          <Routes>
-            <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/join' element={<Join isLogin={isLogin} />} />
-            <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} setMemberName={setMemberName} />} />
-            <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/items/search/:name' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/basket' element={<ItemBasket isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/orders/:id' element={<OrderDetail isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/orders/payment' element={<OrderPayment isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/profile' element={<Profile isLogin={isLogin} setLogin={setLogin} />} />
-            <Route path='/profile-edit' element={<ProfileEdit isLogin={isLogin} setLogin={setLogin} />} />
-          </Routes>
+          {
+            isAppLoad ?
+              <Routes>
+                <Route path='/' element={<Home isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/join' element={<Join isLogin={isLogin} />} />
+                <Route path='/login' element={<Login isLogin={isLogin} setLogin={setLogin} setMemberName={setMemberName} />} />
+                <Route path='/items' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/items/search/:name' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/basket' element={<ItemBasket isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/orders/:id' element={<OrderDetail isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/orders/payment' element={<OrderPayment isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/profile' element={<Profile isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/profile-edit' element={<ProfileEdit isLogin={isLogin} setLogin={setLogin} />} />
+              </Routes> : <div></div>
+          }
         </div>
       </BrowserRouter>
     </ThemeProvider>

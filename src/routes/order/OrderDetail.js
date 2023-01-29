@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import OrderDetailCard from "./OrderDetailCard";
 
 function OrderDetail({ isLogin, setLogin }) {
-    const navigate = useNavigate();
+
     const { id } = useParams();
     const [orderInfo, setOrderInfo] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -25,12 +25,10 @@ function OrderDetail({ isLogin, setLogin }) {
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
-            console.log(response);
             if (jwtHeader !== undefined) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
@@ -100,6 +98,14 @@ function OrderDetail({ isLogin, setLogin }) {
                                         <tr>
                                             <td>주문날짜</td>
                                             <td>{orderInfo[0].orderDate}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>배송상태</td>
+                                            <td>{orderInfo[0].deliveryStatus}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>배송지</td>
+                                            <td>{`${orderInfo[0].address.region} ${orderInfo[0].address.road} ${orderInfo[0].address.home}`}</td>
                                         </tr>
                                     </tbody>
                                 </Table>

@@ -57,6 +57,7 @@ function OrderList({ isLogin, setLogin }) {
                                         <th>주문상태</th>
                                         <th>금액</th>
                                         <th>주문날짜</th>
+                                        <th>배송상태</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -68,6 +69,7 @@ function OrderList({ isLogin, setLogin }) {
                                                 <td>{o.orderStatus}</td>
                                                 <td>{o.price}</td>
                                                 <td>{o.orderDate}</td>
+                                                <td>{o.deliveryStatus}</td>
                                                 <td><Button size="sm" onClick={() => { navigate(`/orders/${o.id}`) }}>상세보기</Button></td>
                                             </tr>
                                         );

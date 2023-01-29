@@ -10,6 +10,7 @@ function ItemBasket({ isLogin, setLogin }) {
     const navigate = useNavigate();
     const [basket, setBasket] = useState(null);
     const [isLoading, setLoading] = useState(true);
+    const [isDeleteLoading, setDeleteLoading] = useState(false);
 
     const getBasket = async () => {
         await axios(
@@ -40,7 +41,7 @@ function ItemBasket({ isLogin, setLogin }) {
 
     useEffect(() => {
         getBasket();
-    }, [])
+    }, [isDeleteLoading])
 
     return (
         isLogin ?
@@ -64,7 +65,7 @@ function ItemBasket({ isLogin, setLogin }) {
                                     <tbody>
                                         {basket.map(function (b) {
                                             return (
-                                                <ItemBasketInfo key={b.id} itemInfo={b} />
+                                                <ItemBasketInfo key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
                                             );
                                         })}
                                     </tbody>

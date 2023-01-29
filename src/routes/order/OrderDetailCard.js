@@ -25,6 +25,12 @@ function OrderDetailCard({ orderItemInfo }) {
                             style={{ width: "200px", height: "150px" }} />
                     </Card.Text>
                 </Card.Body>
+                <Card.Body>
+                    <Card.Title>판매자</Card.Title>
+                    <Card.Text>
+                        {orderItemInfo.username}
+                    </Card.Text>
+                </Card.Body>
             </Card>
             <br />
         </div>

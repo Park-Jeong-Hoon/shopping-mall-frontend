@@ -1,15 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function ItemBasketInfo({ itemInfo }) {
+function ItemBasketInfo({ itemInfo, setDeleteLoading }) {
 
     const navigate = useNavigate();
-    const [isLoading, setLoading] = useState(false);
 
     const deleteItem = async () => {
-        setLoading(true);
+        setDeleteLoading(true);
         await axios(
             {
                 url: '/item/basket/delete',
@@ -32,7 +30,7 @@ function ItemBasketInfo({ itemInfo }) {
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
-            setLoading(false);
+            setDeleteLoading(false);
         }).catch(error => console.error('Error:', error));
     }
 

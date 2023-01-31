@@ -79,6 +79,7 @@ function Profile({ isLogin, setLogin }) {
                                     </tr>
                                 </tbody>
                             </Table>
+                            <div>{`판매수익 : ${profileInfo.revenue}`}</div>
                             <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
                         </div> : null
                 }

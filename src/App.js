@@ -79,6 +79,7 @@ function App() {
                 <Route path='/items/search/:name' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
                 <Route path='/items/:id' element={<ItemDetail isLogin={isLogin} setLogin={setLogin} />} />
                 <Route path='/items/add' element={<ItemAdd isLogin={isLogin} setLogin={setLogin} />} />
+                <Route path='/items/own' element={<ItemList isLogin={isLogin} setLogin={setLogin} />} />
                 <Route path='/basket' element={<ItemBasket isLogin={isLogin} setLogin={setLogin} />} />
                 <Route path='/orders' element={<OrderList isLogin={isLogin} setLogin={setLogin} />} />
                 <Route path='/orders/:id' element={<OrderDetail isLogin={isLogin} setLogin={setLogin} />} />

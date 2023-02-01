@@ -48,6 +48,7 @@ function Navigator({ memberName, isLogin, setLogin }) {
                             isLogin ?
                                 <NavDropdown title={`${memberName}님`} id="basic-nav-dropdown">
                                     <NavDropdown.Item onClick={() => { navigate("/profile") }}>회원정보</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => { navigate("/items/own") }}>등록제품목록</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logout}>로그아웃</NavDropdown.Item>
                                 </NavDropdown> :

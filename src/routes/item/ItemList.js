@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Container, Table } from 'react-bootstrap';
 import Header from "../../components/Header";
 
@@ -10,6 +10,35 @@ function ItemList({ isLogin, setLogin }) {
     const naviagate = useNavigate();
     const [items, setItems] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const location = useLocation();
+
+    const getOwnItems = async () => {
+        await axios(
+            {
+                url: '/item/owns',
+                method: 'get',
+                baseURL: `${process.env.REACT_APP_BACKEND}`,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        ).then(function (response) {
+            let jwtHeader = response.headers.get("Authorization")
+            let jwtToken = '';
+            if (jwtHeader !== undefined) {
+                if (jwtHeader.startsWith('Bearer ')) {
+                    jwtToken = jwtHeader.replace('Bearer ', '');
+                }
+                console.log(jwtToken)
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${jwtToken}`;
+            }
+            setLoading(false);
+            setItems(response.data);
+        }).catch(error => console.error('Error:', error));
+    }
 
     const getItems = async () => {
         if (name === undefined) {
@@ -67,8 +96,12 @@ function ItemList({ isLogin, setLogin }) {
     }
 
     useEffect(() => {
-        getItems();
-    }, [name])
+        if (location.pathname === "/items/own") {
+            getOwnItems();
+        } else {
+            getItems();
+        }
+    }, [name, location.pathname])
 
     const CommaFormat = (n) => {
         return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

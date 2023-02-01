@@ -34,12 +34,16 @@ function ItemBasketInfo({ itemInfo, setDeleteLoading }) {
         }).catch(error => console.error('Error:', error));
     }
 
+    const CommaFormat = (n) => {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <tr>
             <td>{itemInfo.id}</td>
             <td>{itemInfo.name}</td>
-            <td>{itemInfo.price}</td>
-            <td>{itemInfo.stockQuantity}</td>
+            <td>{CommaFormat(itemInfo.price)}</td>
+            <td>{CommaFormat(itemInfo.stockQuantity)}</td>
             <td><Button size={"sm"} onClick={() => {navigate("/orders/payment", {state:{itemList:[itemInfo]}})}}>결제</Button></td>
             <td><Button size={"sm"} variant={"danger"} onClick={deleteItem}>삭제</Button></td>
         </tr>

@@ -70,6 +70,10 @@ function ItemList({ isLogin, setLogin }) {
         getItems();
     }, [name])
 
+    const CommaFormat = (n) => {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <>
             <Header title={'제품목록'} />
@@ -91,7 +95,7 @@ function ItemList({ isLogin, setLogin }) {
                                         <tr>
                                             <td>{i.id}</td>
                                             <td>{i.name}</td>
-                                            <td>{i.price}</td>
+                                            <td>{CommaFormat(i.price)}</td>
                                             <td><Button size='sm' onClick={() => {naviagate(`/items/${i.id}`)}}>상세보기</Button></td>
                                         </tr>
                                     );

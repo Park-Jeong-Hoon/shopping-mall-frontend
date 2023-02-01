@@ -42,6 +42,10 @@ function Profile({ isLogin, setLogin }) {
         getProfile();
     }, [isLoading])
 
+    const CommaFormat = (n) => {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <>
             <Header title={"내정보"} />
@@ -79,7 +83,7 @@ function Profile({ isLogin, setLogin }) {
                                     </tr>
                                 </tbody>
                             </Table>
-                            <div>{`판매수익 : ${profileInfo.revenue}`}</div>
+                            <div>{`판매수익 : ${CommaFormat(profileInfo.revenue)}`}</div>
                             <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
                         </div> : null
                 }

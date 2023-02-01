@@ -72,6 +72,10 @@ function ItemDetail({ isLogin, setLogin }) {
         getItem();
     }, [])
 
+    const CommaFormat = (n) => {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <>
             <Header title={'제품상세'} />
@@ -94,7 +98,7 @@ function ItemDetail({ isLogin, setLogin }) {
                                 <tbody>
                                     <tr>
                                         <td>가격</td>
-                                        <td>{item.price}</td>
+                                        <td>{CommaFormat(item.price)}</td>
                                     </tr>
                                     <tr>
                                         <td>재고</td>

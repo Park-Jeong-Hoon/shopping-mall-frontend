@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap";
 
-function OrderDetailCard({ orderItemInfo }) {
+function OrderDetailCard({ orderItemInfo, CommaFormat }) {
 
     return (
         <div>
@@ -9,13 +9,13 @@ function OrderDetailCard({ orderItemInfo }) {
                 <Card.Body>
                     <Card.Title>단가</Card.Title>
                     <Card.Text>
-                        {orderItemInfo.price}
+                        {CommaFormat(orderItemInfo.price)}
                     </Card.Text>
                 </Card.Body>
                 <Card.Body>
                     <Card.Title>수량</Card.Title>
                     <Card.Text>
-                        {orderItemInfo.quantity}
+                        {CommaFormat(orderItemInfo.quantity)}
                     </Card.Text>
                 </Card.Body>
                 <Card.Body>

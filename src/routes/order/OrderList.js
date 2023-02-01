@@ -43,6 +43,10 @@ function OrderList({ isLogin, setLogin }) {
         getOrders();
     }, [])
 
+    const CommaFormat = (n) => {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         isLogin ?
             <>
@@ -66,10 +70,10 @@ function OrderList({ isLogin, setLogin }) {
                                         return (
                                             <tr>
                                                 <td>{o.id}</td>
-                                                <td>{o.orderStatus}</td>
-                                                <td>{o.price}</td>
-                                                <td>{o.orderDate}</td>
-                                                <td>{o.deliveryStatus}</td>
+                                                <td>{o.orderStatus === "ORDER" ? "주문완료" : o.orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</td>
+                                                <td>{CommaFormat(o.price)}</td>
+                                                <td>{`${o.orderDate.split('T')[0]} ${o.orderDate.split('T')[1]}`}</td>
+                                                <td>{o.deliveryStatus === "READY" ? "준비중" : o.deliveryStatus === "START" ? "배송시작" : "배송완료"}</td>
                                                 <td><Button size="sm" onClick={() => { navigate(`/orders/${o.id}`) }}>상세보기</Button></td>
                                             </tr>
                                         );

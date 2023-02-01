@@ -71,6 +71,10 @@ function OrderDetail({ isLogin, setLogin }) {
         }).catch(error => console.error('Error:', error));
     }
 
+    const CommaFormat = (n) => {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         isLogin ?
             <>
@@ -89,19 +93,19 @@ function OrderDetail({ isLogin, setLogin }) {
                                     <tbody>
                                         <tr>
                                             <th>주문상태</th>
-                                            <th>{orderInfo[0].orderStatus}</th>
+                                            <th>{orderInfo[0].orderStatus === "ORDER" ? "주문완료" : orderInfo[0].orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</th>
                                         </tr>
                                         <tr>
                                             <td>총액</td>
-                                            <td>{orderInfo[0].totalPrice}원</td>
+                                            <td>{CommaFormat(orderInfo[0].totalPrice)}원</td>
                                         </tr>
                                         <tr>
                                             <td>주문날짜</td>
-                                            <td>{orderInfo[0].orderDate}</td>
+                                            <td>{`${orderInfo[0].orderDate.split('T')[0]} ${orderInfo[0].orderDate.split('T')[1]}`}</td>
                                         </tr>
                                         <tr>
                                             <td>배송상태</td>
-                                            <td>{orderInfo[0].deliveryStatus}</td>
+                                            <td>{orderInfo[0].deliveryStatus === "READY" ? "준비중" : orderInfo[0].deliveryStatus === "START" ? "배송시작" : "배송완료"}</td>
                                         </tr>
                                         <tr>
                                             <td>배송지</td>
@@ -112,7 +116,7 @@ function OrderDetail({ isLogin, setLogin }) {
                                 {
                                     orderInfo.map(function (o) {
                                         return (
-                                            <OrderDetailCard orderItemInfo={o} />
+                                            <OrderDetailCard orderItemInfo={o} CommaFormat={CommaFormat} />
                                         );
                                     })
                                 }

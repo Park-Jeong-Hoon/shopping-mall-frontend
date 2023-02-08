@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Container, Spinner, Table } from 'react-bootstrap';
+import { Button, Container, Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
+import { Table } from '../../components/styles/Main';
 
 function ItemDetail({ isLogin, setLogin }) {
 
@@ -80,22 +81,21 @@ function ItemDetail({ isLogin, setLogin }) {
         <>
             <Header title={'제품상세'} />
             <Container>
-                <hr />
                 {
                     isLoading === false ?
                         <div>
-                            <Table responsive striped bordered hover>
+                            <Table>
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>{item.id}</th>
                                     </tr>
-                                    <tr>
-                                        <th>제품명</th>
-                                        <th>{item.name}</th>
-                                    </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>제품명</td>
+                                        <td>{item.name}</td>
+                                    </tr>
                                     <tr>
                                         <td>가격</td>
                                         <td>{CommaFormat(item.price)}</td>

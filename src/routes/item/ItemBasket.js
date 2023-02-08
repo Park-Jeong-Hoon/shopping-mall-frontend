@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import { Main, Table } from "../../components/styles/Main";
 import ItemBasketInfo from "./ItemBasketInfo";
 
 function ItemBasket({ isLogin, setLogin }) {
@@ -48,10 +49,11 @@ function ItemBasket({ isLogin, setLogin }) {
             <>
                 <Header title={'장바구니목록'} />
                 <Container>
+                    <Main>
                     {
                         isLoading === false ?
                             <>
-                                <Table responsive striped bordered hover>
+                                <Table>
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -70,11 +72,12 @@ function ItemBasket({ isLogin, setLogin }) {
                                         })}
                                     </tbody>
                                 </Table>
-                                <Button variant="primary" onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
+                                <Button variant="primary" style={{"width" : "100px", "marginTop":"20px"}} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
                                     전체결제
                                 </Button>
                             </> : null
                     }
+                    </Main>
                 </Container>
             </> : <Navigate to={"/"} />
     )

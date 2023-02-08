@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
+import { Table } from "../../components/styles/Main";
 import OrderDetailCard from "./OrderDetailCard";
 
 function OrderDetail({ isLogin, setLogin }) {
@@ -83,7 +84,7 @@ function OrderDetail({ isLogin, setLogin }) {
                     {
                         isLoading === false ?
                             <div>
-                                <Table responsive striped bordered hover>
+                                <Table>
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -92,8 +93,8 @@ function OrderDetail({ isLogin, setLogin }) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th>주문상태</th>
-                                            <th>{orderInfo[0].orderStatus === "ORDER" ? "주문완료" : orderInfo[0].orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</th>
+                                            <td>주문상태</td>
+                                            <td>{orderInfo[0].orderStatus === "ORDER" ? "주문완료" : orderInfo[0].orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</td>
                                         </tr>
                                         <tr>
                                             <td>총액</td>

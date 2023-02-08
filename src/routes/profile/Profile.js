@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import { Main, Table } from "../../components/styles/Main";
 
 function Profile({ isLogin, setLogin }) {
 
@@ -50,43 +51,45 @@ function Profile({ isLogin, setLogin }) {
         <>
             <Header title={"내정보"} />
             <Container>
-                {
-                    isLoading === false ?
-                        <div>
-                            <Table responsive striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>아이디</th>
-                                        <th>{profileInfo.username}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>이름</th>
-                                        <th>{profileInfo.name}</th>
-                                    </tr>
-                                    <tr>
-                                        <td>이메일</td>
-                                        <td>{profileInfo.email}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>휴대폰번호</td>
-                                        <td>{profileInfo.phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>주소</td>
-                                        <td>{`${profileInfo.address.region} ${profileInfo.address.road} ${profileInfo.address.home}`}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>우편번호</td>
-                                        <td>{profileInfo.address.zipcode}</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                            <div>{`판매수익 : ${CommaFormat(profileInfo.revenue)}`}</div>
-                            <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
-                        </div> : null
-                }
+                <Main>
+                    {
+                        isLoading === false ?
+                            <div>
+                                <Table>
+                                    <thead>
+                                        <tr>
+                                            <th>아이디</th>
+                                            <th>{profileInfo.username}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>이름</td>
+                                            <td>{profileInfo.name}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>이메일</td>
+                                            <td>{profileInfo.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>휴대폰번호</td>
+                                            <td>{profileInfo.phone}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>주소</td>
+                                            <td>{`${profileInfo.address.region} ${profileInfo.address.road} ${profileInfo.address.home}`}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>우편번호</td>
+                                            <td>{profileInfo.address.zipcode}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                                <div>{`판매수익 : ${CommaFormat(profileInfo.revenue)}`}</div>
+                                <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
+                            </div> : null
+                    }
+                </Main>
             </Container>
         </>
     )

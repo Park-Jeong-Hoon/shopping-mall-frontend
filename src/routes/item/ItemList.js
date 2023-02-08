@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import Header from "../../components/Header";
+import { Main, Table } from '../../components/styles/Main';
 
 function ItemList({ isLogin, setLogin }) {
 
@@ -111,15 +112,16 @@ function ItemList({ isLogin, setLogin }) {
         <>
             <Header title={'제품목록'} />
             <Container>
+                <Main>
                 {
                     isLoading === false ?
-                        <Table responsive striped bordered hover>
+                        <Table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>제품</th>
-                                    <th>가격</th>
-                                    <th></th>
+                                    <th width="15%">#</th>
+                                    <th width="30%">제품</th>
+                                    <th width="30%">가격</th>
+                                    <th width="25%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -136,6 +138,7 @@ function ItemList({ isLogin, setLogin }) {
                             </tbody>
                         </Table> : null
                 }
+                </Main>
             </Container>
         </>
     )

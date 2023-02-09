@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
 import Header from "../../components/Header";
-import { Main, Table } from '../../components/styles/Main';
+import { Main, MainForLoading, Table } from '../../components/styles/Main';
+import Spinner from '../../components/Spinner';
 
 function ItemList({ isLogin, setLogin }) {
 
@@ -112,33 +113,33 @@ function ItemList({ isLogin, setLogin }) {
         <>
             <Header title={'제품목록'} />
             <Container>
-                <Main>
                 {
                     isLoading === false ?
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th width="15%">#</th>
-                                    <th width="30%">제품</th>
-                                    <th width="30%">가격</th>
-                                    <th width="25%"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {items.map(function (i) {
-                                    return (
-                                        <tr>
-                                            <td>{i.id}</td>
-                                            <td>{i.name}</td>
-                                            <td>{CommaFormat(i.price)}</td>
-                                            <td><Button size='sm' onClick={() => {naviagate(`/items/${i.id}`)}}>상세보기</Button></td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </Table> : null
+                        <Main>
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th width="15%">#</th>
+                                        <th width="30%">제품</th>
+                                        <th width="30%">가격</th>
+                                        <th width="25%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {items.map(function (i) {
+                                        return (
+                                            <tr>
+                                                <td>{i.id}</td>
+                                                <td>{i.name}</td>
+                                                <td>{CommaFormat(i.price)}</td>
+                                                <td><Button size='sm' onClick={() => { naviagate(`/items/${i.id}`) }}>상세보기</Button></td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+                        </Main> : <MainForLoading><Spinner /></MainForLoading>
                 }
-                </Main>
             </Container>
         </>
     )

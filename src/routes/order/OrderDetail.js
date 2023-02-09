@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
-import { Table } from "../../components/styles/Main";
+import Spinner from "../../components/Spinner";
+import { Main, MainForLoading, Table } from "../../components/styles/Main";
 import OrderDetailCard from "./OrderDetailCard";
 
 function OrderDetail({ isLogin, setLogin }) {
@@ -83,7 +84,7 @@ function OrderDetail({ isLogin, setLogin }) {
                 <Container>
                     {
                         isLoading === false ?
-                            <div>
+                            <Main>
                                 <Table>
                                     <thead>
                                         <tr>
@@ -125,8 +126,8 @@ function OrderDetail({ isLogin, setLogin }) {
                                     orderInfo[0].orderStatus === "CANCEL" ? null :
                                         <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
                                 }
-                            </div>
-                            : null
+                            </Main>
+                            : <MainForLoading><Spinner /></MainForLoading>
                     }
                 </Container>
             </> : <Navigate to={"/"} />

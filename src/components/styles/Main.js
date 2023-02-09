@@ -3,10 +3,14 @@ import styled from "styled-components";
 
 export const Main = styled.main`
     width: 100%;
-    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+`
+
+export const MainForLoading = styled(Main)`
+    height: calc(100vh - 56px - 80px);
 `
 
 export const Table = styled.table`

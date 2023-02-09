@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import { Main, Table } from "../../components/styles/Main";
+import Spinner from "../../components/Spinner";
+import { Main, MainForLoading, Table } from "../../components/styles/Main";
 import ItemBasketInfo from "./ItemBasketInfo";
 
 function ItemBasket({ isLogin, setLogin }) {
@@ -49,10 +50,10 @@ function ItemBasket({ isLogin, setLogin }) {
             <>
                 <Header title={'장바구니목록'} />
                 <Container>
-                    <Main>
+
                     {
                         isLoading === false ?
-                            <>
+                            <Main>
                                 <Table>
                                     <thead>
                                         <tr>
@@ -65,19 +66,27 @@ function ItemBasket({ isLogin, setLogin }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {basket.map(function (b) {
-                                            return (
-                                                <ItemBasketInfo key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
-                                            );
-                                        })}
+                                        {
+                                            basket.length > 0 ?
+                                                basket.map(function (b) {
+                                                    return (
+                                                        <ItemBasketInfo key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
+                                                    );
+                                                }) :
+                                                <tr>
+                                                    <td colSpan={6}>장바구니로 등록한 제품이 없습니다.</td>
+                                                </tr>
+                                        }
                                     </tbody>
                                 </Table>
-                                <Button variant="primary" style={{"width" : "100px", "marginTop":"20px"}} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
+                                <Button variant="primary" style={{ "width": "100px", "marginTop": "20px" }} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
                                     전체결제
                                 </Button>
-                            </> : null
+                            </Main> : 
+                            <MainForLoading>
+                                <Spinner />
+                            </MainForLoading>
                     }
-                    </Main>
                 </Container>
             </> : <Navigate to={"/"} />
     )

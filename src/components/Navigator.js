@@ -34,7 +34,7 @@ function Navigator({ memberName, isLogin, setLogin }) {
     }
 
     return (
-        <Navbar bg="light" varient="light" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
                 <Navbar.Brand href="/" onClick={(e) => { e.preventDefault(); navigate("/") }}>홈</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import { Main, Table } from "../../components/styles/Main";
+import Spinner from "../../components/Spinner";
+import { Main, MainForLoading, Table } from "../../components/styles/Main";
 
 function OrderList({ isLogin, setLogin }) {
 
@@ -53,9 +54,9 @@ function OrderList({ isLogin, setLogin }) {
             <>
                 <Header title={'주문목록'} />
                 <Container>
-                    <Main>
-                        {
-                            isLoading === false ?
+                    {
+                        isLoading === false ?
+                            <Main>
                                 <Table>
                                     <thead>
                                         <tr>
@@ -81,9 +82,9 @@ function OrderList({ isLogin, setLogin }) {
                                             );
                                         })}
                                     </tbody>
-                                </Table> : null
-                        }
-                    </Main>
+                                </Table>
+                            </Main> : <MainForLoading><Spinner /></MainForLoading>
+                    }
                 </Container>
             </> : <Navigate to={"/"} />
     )

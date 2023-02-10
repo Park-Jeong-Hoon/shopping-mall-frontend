@@ -3,7 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
-import { Table } from '../../components/styles/Main';
+import { Main, MainForLoading, Table } from '../../components/styles/Main';
+import PageSpinner from '../../components/PageSpinner';
 
 function ItemDetail({ isLogin, setLogin }) {
 
@@ -83,7 +84,7 @@ function ItemDetail({ isLogin, setLogin }) {
             <Container>
                 {
                     isLoading === false ?
-                        <div>
+                        <Main>
                             <Table>
                                 <thead>
                                     <tr>
@@ -146,8 +147,8 @@ function ItemDetail({ isLogin, setLogin }) {
                                     </> : null
                             }
 
-                        </div>
-                        : null
+                        </Main>
+                        : <MainForLoading><PageSpinner /></MainForLoading>
                 }
             </Container>
         </>

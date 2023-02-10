@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import Spinner from "../../components/Spinner";
+import PageSpinner from "../../components/PageSpinner";
 import { Main, MainForLoading, Table } from "../../components/styles/Main";
 
 function OrderList({ isLogin, setLogin }) {
@@ -83,7 +83,7 @@ function OrderList({ isLogin, setLogin }) {
                                         })}
                                     </tbody>
                                 </Table>
-                            </Main> : <MainForLoading><Spinner /></MainForLoading>
+                            </Main> : <MainForLoading><PageSpinner /></MainForLoading>
                     }
                 </Container>
             </> : <Navigate to={"/"} />

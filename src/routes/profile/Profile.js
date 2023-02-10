@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import Spinner from "../../components/Spinner";
+import PageSpinner from "../../components/PageSpinner";
 import { Main, MainForLoading, Table } from "../../components/styles/Main";
 
 function Profile({ isLogin, setLogin }) {
@@ -87,7 +87,7 @@ function Profile({ isLogin, setLogin }) {
                             </Table>
                             <div>{`판매수익 : ${CommaFormat(profileInfo.revenue)}`}</div>
                             <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
-                        </Main> : <MainForLoading><Spinner /></MainForLoading>
+                        </Main> : <MainForLoading><PageSpinner /></MainForLoading>
                 }
             </Container>
         </>

@@ -1,7 +1,7 @@
 import { SpinnerStyle } from "./styles/SpinnerStyle";
 
-const Spinner = () => (
+const PageSpinner = () => (
     <SpinnerStyle />
 );
 
-export default Spinner;
+export default PageSpinner;

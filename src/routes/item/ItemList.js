@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
 import Header from "../../components/Header";
 import { Main, MainForLoading, Table } from '../../components/styles/Main';
-import Spinner from '../../components/Spinner';
+import PageSpinner from '../../components/PageSpinner';
 
 function ItemList({ isLogin, setLogin }) {
 
@@ -138,7 +138,7 @@ function ItemList({ isLogin, setLogin }) {
                                     })}
                                 </tbody>
                             </Table>
-                        </Main> : <MainForLoading><Spinner /></MainForLoading>
+                        </Main> : <MainForLoading><PageSpinner /></MainForLoading>
                 }
             </Container>
         </>

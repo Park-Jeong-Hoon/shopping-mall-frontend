@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import PageSpinner from "../../components/PageSpinner";
+import { Main, MainForLoading } from "../../components/styles/Main";
 
 function ProfileEdit({ isLogin, setLogin }) {
 
@@ -96,57 +98,59 @@ function ProfileEdit({ isLogin, setLogin }) {
                     isLogin === false ?
                         <Navigate to={"/"} /> :
                         isLoading ?
-                            <div></div> :
-                            <Form onSubmit={doEdit}>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>아이디</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.username} readOnly />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>이름</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.name} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>이메일</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.email} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>휴대폰 번호</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.phone} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>주소(지역)</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.address.region} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>주소(도로명)</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.address.road} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>주소(상세주소)</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.address.home} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>우편번호</Form.Label>
-                                    <Form.Control type="text" defaultValue={profileInfo.address.zipcode} />
-                                </Form.Group>
-                                {
-                                    isSaveLoading ?
-                                        <Button variant="primary" disabled>
-                                            <Spinner
-                                                as="span"
-                                                animation="border"
-                                                size="sm"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
-                                            {" 저장..."}
-                                        </Button> :
-                                        <Button variant="primary" type="submit">
-                                            저장
-                                        </Button>
-                                }
-                            </Form>
+                            <MainForLoading><PageSpinner /></MainForLoading> :
+                            <Main>
+                                <Form onSubmit={doEdit}>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>아이디</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.username} readOnly />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>이름</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.name} />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>이메일</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.email} />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>휴대폰 번호</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.phone} />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>주소(지역)</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.address.region} />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>주소(도로명)</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.address.road} />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>주소(상세주소)</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.address.home} />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label>우편번호</Form.Label>
+                                        <Form.Control type="text" defaultValue={profileInfo.address.zipcode} />
+                                    </Form.Group>
+                                    {
+                                        isSaveLoading ?
+                                            <Button variant="primary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="border"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                {" 저장..."}
+                                            </Button> :
+                                            <Button variant="primary" type="submit">
+                                                저장
+                                            </Button>
+                                    }
+                                </Form>
+                            </Main>
                 }
             </Container>
         </>

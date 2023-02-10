@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
-import Spinner from "../../components/Spinner";
+import PageSpinner from "../../components/PageSpinner";
 import { Main, MainForLoading, Table } from "../../components/styles/Main";
 import OrderDetailCard from "./OrderDetailCard";
 
@@ -127,7 +127,7 @@ function OrderDetail({ isLogin, setLogin }) {
                                         <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
                                 }
                             </Main>
-                            : <MainForLoading><Spinner /></MainForLoading>
+                            : <MainForLoading><PageSpinner /></MainForLoading>
                     }
                 </Container>
             </> : <Navigate to={"/"} />

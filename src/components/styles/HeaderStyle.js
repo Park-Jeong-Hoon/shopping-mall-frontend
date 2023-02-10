@@ -9,4 +9,6 @@ export const HeaderStyle = styled.header`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+    color: #42444E;
 `

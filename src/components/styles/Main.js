@@ -7,6 +7,7 @@ export const Main = styled.main`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
 `
 
 export const MainForLoading = styled(Main)`
@@ -46,5 +47,36 @@ export const Table = styled.table`
     }
     tr:last-child td:last-child {
         border-bottom-right-radius: 5px;
+    }
+`
+
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    
+    div {
+        display: flex;
+        flex-direction: column;
+        color: 42444E;
+
+        label {
+            font-size: 18px;
+        }
+
+        input {
+            border: 1px solid #C6C9CC;
+            border-radius: 5px;
+            height: 40px;
+            font-size: 20px;
+            padding: 5px;
+            margin-bottom: 30px;
+        }
+    }
+
+    @media (min-width:800px) {
+        width: 600px;
     }
 `

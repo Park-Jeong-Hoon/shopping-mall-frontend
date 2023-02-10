@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Form, Main } from '../../components/styles/Main';
 import { Container, Spinner } from "react-bootstrap";
 import Header from "../../components/Header";
 import { useState } from "react";
@@ -49,22 +49,21 @@ function Login({ isLogin, setLogin, setMemberName }) {
     }
 
     return (
-        <>
+        <Container>
             <Header title={'로그인'} />
-            <Container>
+            <Main>
                 {
                     isLogin ?
                         <Navigate to={"/"} /> :
                         <Form onSubmit={doLogin}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>아이디</Form.Label>
-                                <Form.Control type="text" placeholder="아이디" />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>비밀번호</Form.Label>
-                                <Form.Control type="password" placeholder="비밀번호" />
-                            </Form.Group>
+                            <div>
+                                <label htmlFor="id">아이디</label>
+                                <input id="id" type="text" placeholder="아이디" />
+                            </div>
+                            <div>
+                                <label htmlFor="password">비밀번호</label>
+                                <input id="password" type="password" placeholder="비밀번호" />
+                            </div>
                             {
                                 isLoading ?
                                     <Button variant="primary" disabled>
@@ -83,8 +82,8 @@ function Login({ isLogin, setLogin, setMemberName }) {
                             }
                         </Form>
                 }
-            </Container>
-        </>
+            </Main>
+        </Container>
     )
 }
 

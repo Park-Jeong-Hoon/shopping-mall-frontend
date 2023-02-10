@@ -3,9 +3,7 @@ import { HeaderStyle } from "./styles/HeaderStyle";
 
 function Header({ title }) {
     return (
-        <HeaderStyle>
-            <Container>{title}</Container>
-        </HeaderStyle>
+        <HeaderStyle>{title}</HeaderStyle>
     )
 }
 

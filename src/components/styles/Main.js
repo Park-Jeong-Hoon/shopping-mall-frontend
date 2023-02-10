@@ -76,6 +76,19 @@ export const Form = styled.form`
         }
     }
 
+    .uploader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        font-size: 20px;
+        background-color: #C6C9CC;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+
     @media (min-width:800px) {
         width: 600px;
     }

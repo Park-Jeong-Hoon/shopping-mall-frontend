@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
+import { Form, Main } from '../../components/styles/Main';
 
 function ItemAdd({ isLogin, setLogin }) {
 
     const navigate = useNavigate();
+    const imgInput = useRef();
     const [isLoading, setLoading] = useState(false);
     const [file, setFile] = useState(null);
 
@@ -63,26 +64,32 @@ function ItemAdd({ isLogin, setLogin }) {
 
     return (
         isLogin ?
-            <>
+            <Container>
                 <Header title={'제품등록'} />
-                <Container>
+                <Main>
                     <Form onSubmit={addItem}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>제품명</Form.Label>
-                            <Form.Control type="text" placeholder="상품의 이름을 적어주세요." required />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>금액</Form.Label>
-                            <Form.Control type="number" placeholder="상품의 금액을 적어주세요" required />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>수량</Form.Label>
-                            <Form.Control type="number" placeholder="상품의 수량을 적어주세요" required />
-                        </Form.Group>
-                        <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>제품사진</Form.Label>
-                            <Form.Control type="file" onChange={handleChangeFile} required />
-                        </Form.Group>
+                        <div>
+                            <label htmlFor="name">제품명</label>
+                            <input id="name" type="text" placeholder="제품의 이름을 적어주세요" required />
+                        </div>
+                        <div>
+                            <label htmlFor="price">금액</label>
+                            <input id="price" type="number" placeholder="제품의 금액을 적어주세요" required />
+                        </div>
+                        <div>
+                            <label htmlFor="count">수량</label>
+                            <input id="count" type="number" placeholder="제품의 수량을 적어주세요" required />
+                        </div>
+                        <div>
+                            <label htmlFor="image">제품사진</label>
+                            <input id="image" type="file" style={{"display" : "none"}} ref={imgInput} onChange={handleChangeFile} required />
+                            <div className='uploader' onClick={() => {imgInput.current?.click()}}>
+                                {
+                                    file === null || file === undefined ?
+                                    "제품사진 업로드" : file.name
+                                }
+                            </div>
+                        </div>
                         {
                             isLoading ?
                                 <Button variant="primary" disabled>
@@ -100,8 +107,8 @@ function ItemAdd({ isLogin, setLogin }) {
                                 </Button>
                         }
                     </Form>
-                </Container>
-            </> : <Navigate to={"/"} />
+                </Main>
+            </Container> : <Navigate to={"/"} />
     )
 }
 

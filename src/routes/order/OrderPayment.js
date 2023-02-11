@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Spinner } from "react-bootstrap";
+import { Button, Container, Spinner } from "react-bootstrap";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import { Form, Main } from "../../components/styles/Main";
 import OrderItemInfo from "./OrderItemInfo";
 
 function OrderPayment({ isLogin, setLogin }) {
@@ -74,9 +75,9 @@ function OrderPayment({ isLogin, setLogin }) {
 
     return (
         isLogin ?
-            <>
+            <Container>
                 <Header title={"주문결제"} />
-                <Container>
+                <Main>
                     <Form onSubmit={doOrder}>
                         {itemList.map(function (itemInfo) {
                             return (
@@ -102,8 +103,8 @@ function OrderPayment({ isLogin, setLogin }) {
                                 </Button>
                         }
                     </Form>
-                </Container>
-            </> : <Navigate to={"/"} />
+                </Main>
+            </Container> : <Navigate to={"/"} />
     )
 }
 

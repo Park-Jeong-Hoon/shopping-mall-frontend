@@ -50,6 +50,14 @@ export const Table = styled.table`
     }
 `
 
+export const InfoTable = styled(Table)`
+    margin-bottom: 20px;
+
+    @media (min-width:800px) {
+        width: 600px;
+    }
+`
+
 export const Form = styled.form`
     display: flex;
     flex-direction: column;

@@ -1,23 +1,19 @@
-import { Form } from "react-bootstrap";
-
 function OrderItemInfo({ itemInfo, controlQuantity }) {
+    
     return (
         <>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>상품명</Form.Label>
-                <Form.Control type="text" defaultValue={itemInfo.name} readOnly />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>금액</Form.Label>
-                <Form.Control type="number" defaultValue={itemInfo.price} readOnly />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail" onChange={(e) => { controlQuantity(e, itemInfo.id) }}>
-                <Form.Label>수량</Form.Label>
-                <Form.Control type="number" placeholder="상품의 수량을 적어주세요" required min={1} />
-                <Form.Text>
-                    {`수량이 재고보다 많을 경우 주문이 이뤄지지 않습니다.`}
-                </Form.Text>
-            </Form.Group>
+            <div>
+                <label htmlFor="name">상품명</label>
+                <input id="name" type="text" defaultValue={itemInfo.name} readOnly />
+            </div>
+            <div>
+                <label htmlFor="price">금액</label>
+                <input id="price" type="number" defaultValue={itemInfo.price} readOnly />
+            </div>
+            <div onChange={(e) => { controlQuantity(e, itemInfo.id) }}>
+                <label htmlFor="count">수량</label>
+                <input id="count" type="number" placeholder="상품의 수량을 적어주세요" required min={1} />
+            </div>
             <hr />
         </>
     )

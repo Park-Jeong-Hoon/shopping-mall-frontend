@@ -22,6 +22,11 @@ function ItemAdd({ isLogin, setLogin }) {
 
         e.preventDefault();
         setLoading(true);
+        if (file === null || file === undefined) {
+            alert("제품 이미지를 업로드해주세요");
+            setLoading(false);
+            return;
+        }
         const formData = new FormData();
         formData.append("file", file);
         formData.append("json",
@@ -82,11 +87,11 @@ function ItemAdd({ isLogin, setLogin }) {
                         </div>
                         <div>
                             <label htmlFor="image">제품사진</label>
-                            <input id="image" type="file" style={{"display" : "none"}} ref={imgInput} onChange={handleChangeFile} required />
-                            <div className='uploader' onClick={() => {imgInput.current?.click()}}>
+                            <input id="image" type="file" style={{ "display": "none" }} ref={imgInput} onChange={handleChangeFile} />
+                            <div className='uploader' onClick={() => { imgInput.current?.click() }}>
                                 {
                                     file === null || file === undefined ?
-                                    "제품사진 업로드" : file.name
+                                        "제품사진 업로드" : file.name
                                 }
                             </div>
                         </div>

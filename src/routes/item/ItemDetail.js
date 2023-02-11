@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
-import { Main, MainForLoading, Table } from '../../components/styles/Main';
+import { InfoTable, Main, MainForLoading } from '../../components/styles/Main';
 import PageSpinner from '../../components/PageSpinner';
 
 function ItemDetail({ isLogin, setLogin }) {
@@ -79,79 +79,77 @@ function ItemDetail({ isLogin, setLogin }) {
     }
 
     return (
-        <>
+        <Container>
             <Header title={'제품상세'} />
-            <Container>
-                {
-                    isLoading === false ?
-                        <Main>
-                            <Table>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{item.id}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>제품명</td>
-                                        <td>{item.name}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>가격</td>
-                                        <td>{CommaFormat(item.price)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>재고</td>
-                                        <td>{item.stockQuantity}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>이미지</td>
-                                        <td>
-                                            <img src={`${item.imageName}`}
-                                                style={{ width: "200px", height: "150px" }} />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>판매자</td>
-                                        <td>{item.username}</td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                            {
-                                isLogin ?
-                                    <>
-                                        <Button onClick={() => {
-                                            navigate("/orders/payment", {
-                                                state: {
-                                                    itemList: [item]
-                                                }
-                                            })
-                                        }}>주문하기</Button>{' '}
-                                        {
-                                            isBasketLoading ?
-                                                <Button variant="secondary" disabled>
-                                                    <Spinner
-                                                        as="span"
-                                                        animation="border"
-                                                        size="sm"
-                                                        role="status"
-                                                        aria-hidden="true"
-                                                    />
-                                                    {" 장바구니담기..."}
-                                                </Button> :
-                                                <Button variant='secondary' onClick={() => {
-                                                    keepItem(item.id);
-                                                }}>장바구니담기</Button>
-                                        }
-                                    </> : null
-                            }
+            {
+                isLoading === false ?
+                    <Main>
+                        <InfoTable>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{item.id}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>제품명</td>
+                                    <td>{item.name}</td>
+                                </tr>
+                                <tr>
+                                    <td>가격</td>
+                                    <td>{CommaFormat(item.price)}</td>
+                                </tr>
+                                <tr>
+                                    <td>재고</td>
+                                    <td>{item.stockQuantity}</td>
+                                </tr>
+                                <tr>
+                                    <td>이미지</td>
+                                    <td>
+                                        <img src={`${item.imageName}`}
+                                            style={{ width: "200px", height: "150px" }} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>판매자</td>
+                                    <td>{item.username}</td>
+                                </tr>
+                            </tbody>
+                        </InfoTable>
+                        {
+                            isLogin ?
+                                <div>
+                                    <Button onClick={() => {
+                                        navigate("/orders/payment", {
+                                            state: {
+                                                itemList: [item]
+                                            }
+                                        })
+                                    }}>주문하기</Button>{' '}
+                                    {
+                                        isBasketLoading ?
+                                            <Button variant="secondary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="border"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                {" 장바구니담기..."}
+                                            </Button> :
+                                            <Button variant='secondary' onClick={() => {
+                                                keepItem(item.id);
+                                            }}>장바구니담기</Button>
+                                    }
+                                </div> : null
+                        }
 
-                        </Main>
-                        : <MainForLoading><PageSpinner /></MainForLoading>
-                }
-            </Container>
-        </>
+                    </Main>
+                    : <MainForLoading><PageSpinner /></MainForLoading>
+            }
+        </Container>
     )
 }
 

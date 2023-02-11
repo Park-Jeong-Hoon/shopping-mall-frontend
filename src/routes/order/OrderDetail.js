@@ -4,7 +4,7 @@ import { Button, Container } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import PageSpinner from "../../components/PageSpinner";
-import { Main, MainForLoading, Table } from "../../components/styles/Main";
+import { InfoTable, Main, MainForLoading } from "../../components/styles/Main";
 import OrderDetailCard from "./OrderDetailCard";
 
 function OrderDetail({ isLogin, setLogin }) {
@@ -79,58 +79,56 @@ function OrderDetail({ isLogin, setLogin }) {
 
     return (
         isLogin ?
-            <>
+            <Container>
                 <Header title={"주문상세"} />
-                <Container>
-                    {
-                        isLoading === false ?
-                            <Main>
-                                <Table>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>{orderInfo[0].orderId}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>주문상태</td>
-                                            <td>{orderInfo[0].orderStatus === "ORDER" ? "주문완료" : orderInfo[0].orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>총액</td>
-                                            <td>{CommaFormat(orderInfo[0].totalPrice)}원</td>
-                                        </tr>
-                                        <tr>
-                                            <td>주문날짜</td>
-                                            <td>{`${orderInfo[0].orderDate.split('T')[0]} ${orderInfo[0].orderDate.split('T')[1]}`}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>배송상태</td>
-                                            <td>{orderInfo[0].deliveryStatus === "READY" ? "준비중" : orderInfo[0].deliveryStatus === "START" ? "배송시작" : "배송완료"}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>배송지</td>
-                                            <td>{`${orderInfo[0].address.region} ${orderInfo[0].address.road} ${orderInfo[0].address.home}`}</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                                {
-                                    orderInfo.map(function (o) {
-                                        return (
-                                            <OrderDetailCard orderItemInfo={o} CommaFormat={CommaFormat} />
-                                        );
-                                    })
-                                }
-                                {
-                                    orderInfo[0].orderStatus === "CANCEL" ? null :
-                                        <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
-                                }
-                            </Main>
-                            : <MainForLoading><PageSpinner /></MainForLoading>
-                    }
-                </Container>
-            </> : <Navigate to={"/"} />
+                {
+                    isLoading === false ?
+                        <Main>
+                            <InfoTable>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{orderInfo[0].orderId}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>주문상태</td>
+                                        <td>{orderInfo[0].orderStatus === "ORDER" ? "주문완료" : orderInfo[0].orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>총액</td>
+                                        <td>{CommaFormat(orderInfo[0].totalPrice)}원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>주문날짜</td>
+                                        <td>{`${orderInfo[0].orderDate.split('T')[0]} ${orderInfo[0].orderDate.split('T')[1]}`}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>배송상태</td>
+                                        <td>{orderInfo[0].deliveryStatus === "READY" ? "준비중" : orderInfo[0].deliveryStatus === "START" ? "배송시작" : "배송완료"}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>배송지</td>
+                                        <td>{`${orderInfo[0].address.region} ${orderInfo[0].address.road} ${orderInfo[0].address.home}`}</td>
+                                    </tr>
+                                </tbody>
+                            </InfoTable>
+                            {
+                                orderInfo.map(function (o) {
+                                    return (
+                                        <OrderDetailCard orderItemInfo={o} CommaFormat={CommaFormat} />
+                                    );
+                                })
+                            }
+                            {
+                                orderInfo[0].orderStatus === "CANCEL" ? null :
+                                    <Button variant={"danger"} onClick={() => { cancelOrder() }}>주문 취소</Button>
+                            }
+                        </Main>
+                        : <MainForLoading><PageSpinner /></MainForLoading>
+                }
+            </Container> : <Navigate to={"/"} />
     )
 }
 

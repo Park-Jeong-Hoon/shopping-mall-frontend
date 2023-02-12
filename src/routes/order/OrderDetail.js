@@ -114,6 +114,7 @@ function OrderDetail({ isLogin, setLogin }) {
                                     </tr>
                                 </tbody>
                             </InfoTable>
+                            <div className="line"></div>
                             {
                                 orderInfo.map(function (o) {
                                     return (

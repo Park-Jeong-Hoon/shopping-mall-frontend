@@ -8,6 +8,16 @@ export const Main = styled.main`
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
+
+    .line {
+        width: 100%;
+        border: 2px dotted #EAEAED;
+        margin-bottom: 20px;
+
+        @media (min-width:800px) {
+            width: 600px;
+        }
+    }
 `
 
 export const MainForLoading = styled(Main)`

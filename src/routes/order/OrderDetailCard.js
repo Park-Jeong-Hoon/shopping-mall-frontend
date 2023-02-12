@@ -1,39 +1,35 @@
-import { Card } from "react-bootstrap";
+import { InfoTable } from "../../components/styles/Main";
 
 function OrderDetailCard({ orderItemInfo, CommaFormat }) {
 
     return (
-        <div>
-            <Card>
-                <Card.Header as="h4">{orderItemInfo.itemName}</Card.Header>
-                <Card.Body>
-                    <Card.Title>단가</Card.Title>
-                    <Card.Text>
-                        {CommaFormat(orderItemInfo.price)}
-                    </Card.Text>
-                </Card.Body>
-                <Card.Body>
-                    <Card.Title>수량</Card.Title>
-                    <Card.Text>
-                        {CommaFormat(orderItemInfo.quantity)}
-                    </Card.Text>
-                </Card.Body>
-                <Card.Body>
-                    <Card.Title>제품사진</Card.Title>
-                    <Card.Text>
-                        <img src={`${orderItemInfo.imageName}`}
-                            style={{ width: "200px", height: "150px" }} />
-                    </Card.Text>
-                </Card.Body>
-                <Card.Body>
-                    <Card.Title>판매자</Card.Title>
-                    <Card.Text>
-                        {orderItemInfo.username}
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            <br />
-        </div>
+        <InfoTable>
+            <thead>
+                <tr>
+                    <th>제품명</th>
+                    <th>{orderItemInfo.itemName}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>단가</td>
+                    <td>{CommaFormat(orderItemInfo.price)}</td>
+                </tr>
+                <tr>
+                    <td>수량</td>
+                    <td>{CommaFormat(orderItemInfo.quantity)}</td>
+                </tr>
+                <tr>
+                    <td>제품사진</td>
+                    <td>                        <img src={`${orderItemInfo.imageName}`}
+                        style={{ width: "200px", height: "150px" }} /></td>
+                </tr>
+                <tr>
+                    <td>판매자</td>
+                    <td>{CommaFormat(orderItemInfo.username)}</td>
+                </tr>
+            </tbody>
+        </InfoTable>
     )
 }
 

@@ -18,6 +18,62 @@ export const Main = styled.main`
             width: 600px;
         }
     }
+
+    .item-container {
+        display:flex;
+        flex-direction: row;
+        flex-wrap : wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .item-card {
+        width: 300px;
+        border: 1px solid #C6C9CC;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        padding: 20px;
+        font-size: 18px;
+
+        div {
+            display: flex;
+            width: 100%;
+        }
+        
+        div:nth-child(2) {
+            justify-content: center;
+            align-items: center;
+        }
+
+        div:nth-child(3) {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            div {
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        div:last-child {
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        img {
+            border-radius: 5px;
+            width: 100%;
+            height: 200px;
+            
+            @media (max-width:768px) {
+                width: 200px;
+                height: 150px
+            }
+        }
+
+        @media (max-width:768px) {
+            width: 100%;
+        }
+    }
 `
 
 export const MainForLoading = styled(Main)`

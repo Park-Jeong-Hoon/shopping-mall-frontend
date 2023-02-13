@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Header from "../../components/Header";
-import { Main, MainForLoading, Table } from '../../components/styles/Main';
+import { Main, MainForLoading } from '../../components/styles/Main';
 import PageSpinner from '../../components/PageSpinner';
+import ItemCard from './ItemCard';
 
 function ItemList({ isLogin, setLogin }) {
 
@@ -105,43 +106,24 @@ function ItemList({ isLogin, setLogin }) {
         }
     }, [name, location.pathname])
 
-    const CommaFormat = (n) => {
-        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     return (
-        <>
+        <Container>
             <Header title={'제품목록'} />
-            <Container>
-                {
-                    isLoading === false ?
-                        <Main>
-                            <Table>
-                                <thead>
-                                    <tr>
-                                        <th width="15%">#</th>
-                                        <th width="30%">제품</th>
-                                        <th width="30%">가격</th>
-                                        <th width="25%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {items.map(function (i) {
-                                        return (
-                                            <tr>
-                                                <td>{i.id}</td>
-                                                <td>{i.name}</td>
-                                                <td>{CommaFormat(i.price)}</td>
-                                                <td><Button size='sm' onClick={() => { naviagate(`/items/${i.id}`) }}>상세보기</Button></td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
-                        </Main> : <MainForLoading><PageSpinner /></MainForLoading>
-                }
-            </Container>
-        </>
+            {
+                isLoading === false ?
+                    <Main>
+                        <div className='item-container'>
+                            {
+                                items.map(function (i) {
+                                    return (
+                                        <ItemCard key={i.id} itemInfo={i} />
+                                    )
+                                })
+                            }
+                        </div>
+                    </Main> : <MainForLoading><PageSpinner /></MainForLoading>
+            }
+        </Container>
     )
 }
 

@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Spinner } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import PageSpinner from "../../components/PageSpinner";
+import { Header } from "../../components/styles/Header";
 import { Form, Main, MainForLoading } from "../../components/styles/Main";
 
 function ProfileEdit({ isLogin, setLogin }) {
@@ -92,7 +92,7 @@ function ProfileEdit({ isLogin, setLogin }) {
 
     return (
         <Container>
-            <Header title={"내정보 수정"} />
+            <Header>내정보 수정</Header>
             {
                 isLogin === false ?
                     <Navigate to={"/"} /> :

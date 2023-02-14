@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import Header from "../../components/Header";
 import { Main, MainForLoading } from '../../components/styles/Main';
 import PageSpinner from '../../components/PageSpinner';
 import ItemCard from './ItemCard';
+import { Header } from '../../components/styles/Header';
 
 function ItemList({ isLogin, setLogin }) {
 
     const { name } = useParams();
-    const naviagate = useNavigate();
     const [items, setItems] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const location = useLocation();
@@ -108,7 +107,7 @@ function ItemList({ isLogin, setLogin }) {
 
     return (
         <Container>
-            <Header title={'제품목록'} />
+            <Header>제품목록</Header>
             {
                 isLoading === false ?
                     <Main>

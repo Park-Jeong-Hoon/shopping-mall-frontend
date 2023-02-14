@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container, Spinner } from "react-bootstrap";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
+import { Header } from "../../components/styles/Header";
 import { Form, Main } from "../../components/styles/Main";
 import OrderItemInfo from "./OrderItemInfo";
 
@@ -76,7 +76,7 @@ function OrderPayment({ isLogin, setLogin }) {
     return (
         isLogin ?
             <Container>
-                <Header title={"주문결제"} />
+                <Header>주문결제</Header>
                 <Main>
                     <Form onSubmit={doOrder}>
                         {itemList.map(function (itemInfo) {

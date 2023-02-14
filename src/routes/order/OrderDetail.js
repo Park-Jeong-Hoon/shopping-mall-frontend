@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useParams } from "react-router-dom";
-import Header from "../../components/Header";
 import PageSpinner from "../../components/PageSpinner";
+import { Header } from "../../components/styles/Header";
 import { InfoTable, Main, MainForLoading } from "../../components/styles/Main";
 import OrderDetailCard from "./OrderDetailCard";
 
@@ -80,7 +80,7 @@ function OrderDetail({ isLogin, setLogin }) {
     return (
         isLogin ?
             <Container>
-                <Header title={"주문상세"} />
+                <Header>주문상세</Header>
                 {
                     isLoading === false ?
                         <Main>

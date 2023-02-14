@@ -54,7 +54,14 @@ export const Main = styled.main`
             }
         }
 
-        div:last-child {
+        .btns-group {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .detail-btn {
             justify-content: flex-end;
             align-items: center;
         }

@@ -2,10 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import PageSpinner from "../../components/PageSpinner";
+import { Header } from "../../components/styles/Header";
 import { Main, MainForLoading, Table } from "../../components/styles/Main";
-import ItemBasketInfo from "./ItemBasketInfo";
+import ItemCard from "./ItemCard";
 
 function ItemBasket({ isLogin, setLogin }) {
 
@@ -47,48 +47,34 @@ function ItemBasket({ isLogin, setLogin }) {
 
     return (
         isLogin ?
-            <>
-                <Header title={'장바구니목록'} />
-                <Container>
-
-                    {
-                        isLoading === false ?
-                            <Main>
-                                <Table>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>제품명</th>
-                                            <th>금액</th>
-                                            <th>재고</th>
-                                            <th>결제</th>
-                                            <th>삭제</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            basket.length > 0 ?
-                                                basket.map(function (b) {
-                                                    return (
-                                                        <ItemBasketInfo key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
-                                                    );
-                                                }) :
-                                                <tr>
-                                                    <td colSpan={6}>장바구니로 등록한 제품이 없습니다.</td>
-                                                </tr>
-                                        }
-                                    </tbody>
-                                </Table>
-                                <Button variant="primary" style={{ "width": "100px", "marginTop": "20px" }} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
-                                    전체결제
-                                </Button>
-                            </Main> : 
-                            <MainForLoading>
-                                <PageSpinner />
-                            </MainForLoading>
-                    }
-                </Container>
-            </> : <Navigate to={"/"} />
+            <Container>
+                <Header>장바구니목록</Header>
+                {
+                    isLoading === false ?
+                        <Main>
+                            <div className='item-container'>
+                                {
+                                    basket.length > 0 ?
+                                        basket.map(function (b) {
+                                            return (
+                                                <ItemCard key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
+                                            );
+                                        }) :
+                                        <div>장바구니로 등록한 제품이 없습니다.</div>
+                                }
+                            </div>
+                            {
+                                basket.length > 0 ?
+                                    <Button variant="primary" style={{ "width": "100px", "marginTop": "20px" }} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
+                                        전체결제
+                                    </Button> : null
+                            }
+                        </Main> :
+                        <MainForLoading>
+                            <PageSpinner />
+                        </MainForLoading>
+                }
+            </Container> : <Navigate to={"/"} />
     )
 }
 

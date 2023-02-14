@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import PageSpinner from "../../components/PageSpinner";
+import { Header } from "../../components/styles/Header";
 import { InfoTable, Main, MainForLoading } from "../../components/styles/Main";
 
 function Profile({ isLogin, setLogin }) {
@@ -50,7 +50,7 @@ function Profile({ isLogin, setLogin }) {
 
     return (
         <Container>
-            <Header title={"내정보"} />
+            <Header>내정보</Header>
             {
                 isLoading === false ?
                     <Main>
@@ -82,9 +82,12 @@ function Profile({ isLogin, setLogin }) {
                                     <td>우편번호</td>
                                     <td>{profileInfo.address.zipcode}</td>
                                 </tr>
+                                <tr>
+                                    <td>판매수익</td>
+                                    <td>{CommaFormat(profileInfo.revenue)}</td>
+                                </tr>
                             </tbody>
                         </InfoTable>
-                        <div>{`판매수익 : ${CommaFormat(profileInfo.revenue)}`}</div>
                         <Button onClick={() => { navigate("/profile-edit") }}>프로필 수정</Button>
                     </Main> : <MainForLoading><PageSpinner /></MainForLoading>
             }

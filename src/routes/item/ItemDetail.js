@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Spinner } from 'react-bootstrap';
-import Header from "../../components/Header";
 import { InfoTable, Main, MainForLoading } from '../../components/styles/Main';
 import PageSpinner from '../../components/PageSpinner';
+import { Header } from '../../components/styles/Header';
 
 function ItemDetail({ isLogin, setLogin }) {
 
@@ -80,7 +80,7 @@ function ItemDetail({ isLogin, setLogin }) {
 
     return (
         <Container>
-            <Header title={'제품상세'} />
+            <Header>제품상세</Header>
             {
                 isLoading === false ?
                     <Main>

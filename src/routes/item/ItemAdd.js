@@ -3,8 +3,8 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
-import Header from "../../components/Header";
 import { Form, Main } from '../../components/styles/Main';
+import { Header } from '../../components/styles/Header';
 
 function ItemAdd({ isLogin, setLogin }) {
 
@@ -70,7 +70,7 @@ function ItemAdd({ isLogin, setLogin }) {
     return (
         isLogin ?
             <Container>
-                <Header title={'제품등록'} />
+                <Header>제품등록</Header>
                 <Main>
                     <Form onSubmit={addItem}>
                         <div>

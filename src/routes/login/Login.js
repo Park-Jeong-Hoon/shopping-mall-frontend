@@ -3,8 +3,8 @@ import { Navigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { Form, Main } from '../../components/styles/Main';
 import { Container, Spinner } from "react-bootstrap";
-import Header from "../../components/Header";
 import { useState } from "react";
+import { Header } from "../../components/styles/Header";
 
 function Login({ isLogin, setLogin, setMemberName }) {
 
@@ -50,7 +50,7 @@ function Login({ isLogin, setLogin, setMemberName }) {
 
     return (
         <Container>
-            <Header title={'로그인'} />
+            <Header>로그인</Header>
             <Main>
                 {
                     isLogin ?

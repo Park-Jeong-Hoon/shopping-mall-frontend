@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { Container, Spinner } from "react-bootstrap";
-import Header from "../../components/Header";
 import { Form, Main } from "../../components/styles/Main";
+import { Header } from "../../components/styles/Header";
 
 function Join({ isLogin }) {
 
@@ -50,7 +50,7 @@ function Join({ isLogin }) {
 
     return (
         <Container>
-            <Header title={'회원가입'} />
+            <Header>회원가입</Header>
             {
                 isLogin ?
                     <Navigate to={"/"} /> :

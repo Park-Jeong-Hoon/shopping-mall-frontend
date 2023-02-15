@@ -4,7 +4,7 @@ import { Button, Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import PageSpinner from "../../components/PageSpinner";
 import { Header } from "../../components/styles/Header";
-import { Main, MainForLoading, Table } from "../../components/styles/Main";
+import { Main, MainForLoading } from "../../components/styles/Main";
 import ItemCard from "./ItemCard";
 
 function ItemBasket({ isLogin, setLogin }) {
@@ -52,22 +52,24 @@ function ItemBasket({ isLogin, setLogin }) {
                 {
                     isLoading === false ?
                         <Main>
-                            <div className='item-container'>
-                                {
-                                    basket.length > 0 ?
-                                        basket.map(function (b) {
-                                            return (
-                                                <ItemCard key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
-                                            );
-                                        }) :
-                                        <div>장바구니로 등록한 제품이 없습니다.</div>
-                                }
-                            </div>
                             {
                                 basket.length > 0 ?
-                                    <Button variant="primary" style={{ "width": "100px", "marginTop": "20px" }} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
-                                        전체결제
-                                    </Button> : null
+                                    <>
+                                        <div className='item-container'>
+                                            {
+
+                                                basket.map(function (b) {
+                                                    return (
+                                                        <ItemCard key={b.id} itemInfo={b} setDeleteLoading={setDeleteLoading} />
+                                                    );
+                                                })
+                                            }
+                                        </div>
+                                        <Button variant="primary" style={{ "width": "100px", "marginTop": "20px" }} onClick={() => { navigate("/orders/payment", { state: { itemList: basket } }) }}>
+                                            전체결제
+                                        </Button>
+                                    </> :
+                                    <div>장바구니로 등록한 제품이 없습니다.</div>
                             }
                         </Main> :
                         <MainForLoading>

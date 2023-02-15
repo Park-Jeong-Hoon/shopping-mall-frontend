@@ -68,18 +68,26 @@ function OrderList({ isLogin, setLogin }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {orders.map(function (o) {
-                                        return (
+                                    {
+                                        orders.length !== 0 ?
+                                            orders.map(function (o) {
+                                                return (
+                                                    <tr>
+                                                        <td>{o.id}</td>
+                                                        <td>{o.orderStatus === "ORDER" ? "주문완료" : o.orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</td>
+                                                        <td>{CommaFormat(o.price)}</td>
+                                                        <td>{`${o.orderDate.split('T')[0]} ${o.orderDate.split('T')[1]}`}</td>
+                                                        <td>{o.deliveryStatus === "READY" ? "준비중" : o.deliveryStatus === "START" ? "배송시작" : "배송완료"}</td>
+                                                        <td><Button size="sm" onClick={() => { navigate(`/orders/${o.id}`) }}>상세보기</Button></td>
+                                                    </tr>
+                                                );
+                                            }) :
                                             <tr>
-                                                <td>{o.id}</td>
-                                                <td>{o.orderStatus === "ORDER" ? "주문완료" : o.orderStatus === "CANCEL" ? "주문취소" : "부분주문취소"}</td>
-                                                <td>{CommaFormat(o.price)}</td>
-                                                <td>{`${o.orderDate.split('T')[0]} ${o.orderDate.split('T')[1]}`}</td>
-                                                <td>{o.deliveryStatus === "READY" ? "준비중" : o.deliveryStatus === "START" ? "배송시작" : "배송완료"}</td>
-                                                <td><Button size="sm" onClick={() => { navigate(`/orders/${o.id}`) }}>상세보기</Button></td>
+                                                <td colSpan={6}>
+                                                    주문내역이 없습니다.
+                                                </td>
                                             </tr>
-                                        );
-                                    })}
+                                    }
                                 </tbody>
                             </Table>
                         </Main> : <MainForLoading><PageSpinner /></MainForLoading>

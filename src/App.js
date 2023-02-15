@@ -17,6 +17,7 @@ import Profile from './routes/profile/Profile';
 import ProfileEdit from './routes/profile/ProfileEdit';
 import axios from 'axios';
 import { ThemeProvider } from 'react-bootstrap';
+import { Footer } from './components/styles/Footer';
 
 function App() {
 
@@ -88,6 +89,7 @@ function App() {
                 <Route path='/profile-edit' element={<ProfileEdit isLogin={isLogin} setLogin={setLogin} />} />
               </Routes> : <div></div>
           }
+          <Footer>&copy;online-shop</Footer>
         </div>
       </BrowserRouter>
     </ThemeProvider>

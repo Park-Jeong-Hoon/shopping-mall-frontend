@@ -57,12 +57,10 @@ function Login({ isLogin, setLogin, setMemberName }) {
                         <Navigate to={"/"} /> :
                         <Form onSubmit={doLogin}>
                             <div>
-                                <label htmlFor="id">아이디</label>
-                                <input id="id" type="text" placeholder="아이디" />
+                                <input type="text" placeholder="아이디" />
                             </div>
                             <div>
-                                <label htmlFor="password">비밀번호</label>
-                                <input id="password" type="password" placeholder="비밀번호" />
+                                <input type="password" placeholder="비밀번호" />
                             </div>
                             {
                                 isLoading ?

@@ -19,7 +19,7 @@ export const Main = styled.main`
         }
     }
 
-    .item-container {
+    .item-container, .order-container {
         display:flex;
         flex-direction: row;
         flex-wrap : wrap;
@@ -75,6 +75,29 @@ export const Main = styled.main`
                 width: 200px;
                 height: 150px
             }
+        }
+
+        @media (max-width:768px) {
+            width: 100%;
+        }
+    }
+
+    .order-card {
+        width: 300px;
+        border: 1px solid #C6C9CC;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        padding: 20px;
+        font-size: 18px;
+
+        div {
+            display: flex;
+            width: 100%;
+        }
+
+        .detail-btn {
+            justify-content: flex-end;
+            align-items: center;
         }
 
         @media (max-width:768px) {

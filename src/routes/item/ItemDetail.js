@@ -98,7 +98,7 @@ function ItemDetail({ isLogin, setLogin }) {
                                 </tr>
                                 <tr>
                                     <td>가격</td>
-                                    <td>{CommaFormat(item.price)}</td>
+                                    <td>{`${CommaFormat(item.price)}\\`}</td>
                                 </tr>
                                 <tr>
                                     <td>재고</td>

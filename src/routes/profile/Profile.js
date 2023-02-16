@@ -84,7 +84,7 @@ function Profile({ isLogin, setLogin }) {
                                 </tr>
                                 <tr>
                                     <td>판매수익</td>
-                                    <td>{CommaFormat(profileInfo.revenue)}</td>
+                                    <td>{`${CommaFormat(profileInfo.revenue)}\\`}</td>
                                 </tr>
                             </tbody>
                         </InfoTable>

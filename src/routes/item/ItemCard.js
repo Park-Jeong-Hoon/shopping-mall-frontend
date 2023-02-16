@@ -40,7 +40,7 @@ function ItemCard({ itemInfo, setDeleteLoading }) {
 
     return (
         <div className="item-card">
-            <div>{itemInfo.id}</div>
+            <div>{`#${itemInfo.id}`}</div>
             <div><img src={`${itemInfo.imageName}`} /></div>
             <div>
                 <div>{itemInfo.name}</div>

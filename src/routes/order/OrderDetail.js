@@ -98,7 +98,7 @@ function OrderDetail({ isLogin, setLogin }) {
                                     </tr>
                                     <tr>
                                         <td>총액</td>
-                                        <td>{CommaFormat(orderInfo[0].totalPrice)}원</td>
+                                        <td>{`${CommaFormat(orderInfo[0].totalPrice)}\\`}</td>
                                     </tr>
                                     <tr>
                                         <td>주문날짜</td>

@@ -13,7 +13,7 @@ function OrderDetailCard({ orderItemInfo, CommaFormat }) {
             <tbody>
                 <tr>
                     <td>단가</td>
-                    <td>{CommaFormat(orderItemInfo.price)}</td>
+                    <td>{`${CommaFormat(orderItemInfo.price)}\\`}</td>
                 </tr>
                 <tr>
                     <td>수량</td>

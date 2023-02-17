@@ -52,16 +52,18 @@ function OrderList({ isLogin, setLogin }) {
                 {
                     isLoading === false ?
                         <Main>
-                            <div className="order-container">
-                                {
-                                    orders.length !== 0 ?
-                                        orders.map(function (o) {
-                                            return (
-                                                <OrderCard key={o.id} orderInfo={o} />
-                                            );
-                                        }) : <div>주문내역이 없습니다.</div>
-                                }
-                            </div>
+                            {
+                                orders.length !== 0 ?
+                                    <div className="order-container">
+                                        {
+                                            orders.map(function (o) {
+                                                return (
+                                                    <OrderCard key={o.id} orderInfo={o} />
+                                                );
+                                            })
+                                        }
+                                    </div> : <div>주문내역이 없습니다.</div>
+                            }
                         </Main> : <MainForLoading><PageSpinner /></MainForLoading>
                 }
             </Container> : <Navigate to={"/"} />

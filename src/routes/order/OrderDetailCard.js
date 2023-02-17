@@ -21,8 +21,10 @@ function OrderDetailCard({ orderItemInfo, CommaFormat }) {
                 </tr>
                 <tr>
                     <td>제품사진</td>
-                    <td>                        <img src={`${orderItemInfo.imageName}`}
-                        style={{ width: "200px", height: "150px" }} /></td>
+                    <td>
+                        <img src={`${orderItemInfo.imageName}`}
+                            style={{ width: "200px", height: "150px" }} />
+                    </td>
                 </tr>
                 <tr>
                     <td>판매자</td>

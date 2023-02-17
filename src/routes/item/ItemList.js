@@ -111,15 +111,18 @@ function ItemList({ isLogin, setLogin }) {
             {
                 isLoading === false ?
                     <Main>
-                        <div className='item-container'>
-                            {
-                                items.map(function (i) {
-                                    return (
-                                        <ItemCard key={i.id} itemInfo={i} />
-                                    )
-                                })
-                            }
-                        </div>
+                        {
+                            items.length !== 0 ?
+                                <div className='item-container'>
+                                    {
+                                        items.map(function (i) {
+                                            return (
+                                                <ItemCard key={i.id} itemInfo={i} />
+                                            )
+                                        })
+                                    }
+                                </div> : <div>등록된 제품이 없습니다.</div>
+                        }
                     </Main> : <MainForLoading><PageSpinner /></MainForLoading>
             }
         </Container>

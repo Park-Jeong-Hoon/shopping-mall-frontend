@@ -12,6 +12,7 @@ function OrderCard({ orderInfo }) {
     return (
         <div className="order-card">
             <div>{`#${orderInfo.id}`}</div>
+            <div>{orderInfo.name}</div>
             <div>{orderInfo.orderStatus === "ORDER" ? "주문완료"
                 : orderInfo.orderStatus === "CANCEL" ? "주문취소"
                     : "부분주문취소"}</div>

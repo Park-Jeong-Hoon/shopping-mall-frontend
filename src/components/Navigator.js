@@ -24,7 +24,7 @@ function Navigator({ memberName, isLogin, setLogin }) {
             } else {
                 alert("다시 시도해주세요");
             }
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
     
     const searchItem = async (e) => {

@@ -32,14 +32,13 @@ function ItemDetail({ isLogin, setLogin }) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
             setLoading(false);
             setItem(response.data);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     const keepItem = async (id) => {
@@ -67,7 +66,7 @@ function ItemDetail({ isLogin, setLogin }) {
                 ] = `Bearer ${jwtToken}`;
             }
             setBasketLoading(false);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     useEffect(() => {

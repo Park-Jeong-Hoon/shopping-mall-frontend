@@ -15,7 +15,6 @@ function ItemAdd({ isLogin, setLogin }) {
 
     const handleChangeFile = (e) => {
         setFile(e.target.files[0]);
-        console.log(e.target.files[0])
     }
 
     const addItem = async (e) => {
@@ -64,7 +63,7 @@ function ItemAdd({ isLogin, setLogin }) {
             }
             setLoading(false);
             navigate("/items");
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     return (

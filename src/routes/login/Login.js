@@ -28,7 +28,6 @@ function Login({ isLogin, setLogin, setMemberName }) {
                 }
             }
         ).then(function (response) {
-            console.log(response.data);
             if (response.data.result === "success") {
                 let jwtHeader = response.headers.get("Authorization")
                 let jwtToken = '';
@@ -45,7 +44,7 @@ function Login({ isLogin, setLogin, setMemberName }) {
                 alert("아이디 또는 비밀번호가 일치하지 않습니다.");
                 setLoading(false);
             }
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     return (

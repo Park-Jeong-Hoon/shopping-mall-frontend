@@ -38,7 +38,7 @@ function ItemBasket({ isLogin, setLogin }) {
             }
             setBasket(response.data);
             setLoading(false);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     useEffect(() => {

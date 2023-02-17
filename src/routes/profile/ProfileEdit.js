@@ -27,19 +27,17 @@ function ProfileEdit({ isLogin, setLogin }) {
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
-            console.log(response);
             if (jwtHeader !== undefined) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
             setLoading(false);
             setProfileInfo(response.data);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     useEffect(() => {
@@ -87,7 +85,7 @@ function ProfileEdit({ isLogin, setLogin }) {
                 navigate("/profile")
             }
             setSaveLoading(false);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     return (

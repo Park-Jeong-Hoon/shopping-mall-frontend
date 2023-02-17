@@ -45,7 +45,7 @@ function Join({ isLogin }) {
                 setLoading(false);
                 alert("다시 시도해주세요");
             }
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     return (

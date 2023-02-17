@@ -37,7 +37,7 @@ function OrderDetail({ isLogin, setLogin }) {
             }
             setLoading(false);
             setOrderInfo(response.data);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     useEffect(() => {
@@ -64,13 +64,12 @@ function OrderDetail({ isLogin, setLogin }) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
             setLoading(false);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     const CommaFormat = (n) => {

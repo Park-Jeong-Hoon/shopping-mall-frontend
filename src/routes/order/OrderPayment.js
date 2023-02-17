@@ -31,19 +31,17 @@ function OrderPayment({ isLogin, setLogin }) {
         ).then(function (response) {
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
-            console.log(response);
             if (jwtHeader !== undefined) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
             setLoading(false);
             navigate("/orders");
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     useEffect(() => {
@@ -59,7 +57,6 @@ function OrderPayment({ isLogin, setLogin }) {
     }, []);
 
     const controlQuantity = (e, id) => {
-        console.log(e.target.value, ",", id)
         let findIndex = itemList.findIndex(item => item.id === id)
         let copiedItemList = [...itemList];
         copiedItemList[findIndex].quantity = e.target.value;

@@ -32,14 +32,13 @@ function ItemList({ isLogin, setLogin }) {
                 if (jwtHeader.startsWith('Bearer ')) {
                     jwtToken = jwtHeader.replace('Bearer ', '');
                 }
-                console.log(jwtToken)
                 axios.defaults.headers.common[
                     "Authorization"
                 ] = `Bearer ${jwtToken}`;
             }
             setLoading(false);
             setItems(response.data);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     const getItems = async () => {
@@ -61,14 +60,13 @@ function ItemList({ isLogin, setLogin }) {
                     if (jwtHeader.startsWith('Bearer ')) {
                         jwtToken = jwtHeader.replace('Bearer ', '');
                     }
-                    console.log(jwtToken)
                     axios.defaults.headers.common[
                         "Authorization"
                     ] = `Bearer ${jwtToken}`;
                 }
                 setLoading(false);
                 setItems(response.data);
-            }).catch(error => console.error('Error:', error));
+            }).catch(error => {});
         } else {
             await axios(
                 {
@@ -93,7 +91,7 @@ function ItemList({ isLogin, setLogin }) {
                 }
                 setLoading(false);
                 setItems(response.data);
-            }).catch(error => console.error('Error:', error));
+            }).catch(error => {});
         }
     }
 

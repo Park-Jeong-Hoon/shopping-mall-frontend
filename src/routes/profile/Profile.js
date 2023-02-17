@@ -24,7 +24,6 @@ function Profile({ isLogin, setLogin }) {
                 },
             }
         ).then(function (response) {
-            console.log(response.data)
             let jwtHeader = response.headers.get("Authorization")
             let jwtToken = '';
             if (jwtHeader !== undefined) {
@@ -37,7 +36,7 @@ function Profile({ isLogin, setLogin }) {
             }
             setLoading(false);
             setProfileInfo(response.data);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     useEffect(() => {

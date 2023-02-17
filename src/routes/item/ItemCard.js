@@ -35,7 +35,7 @@ function ItemCard({ itemInfo, setDeleteLoading }) {
                 ] = `Bearer ${jwtToken}`;
             }
             setDeleteLoading(false);
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => {});
     }
 
     return (
